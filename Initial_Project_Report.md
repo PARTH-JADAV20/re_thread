@@ -33,29 +33,29 @@ Thus problem to be solved is, the lack of a user-friendly, trustworthy, and effi
  <br>
 
  ### Figma Design ScreenShots
- <br>
+
  ![1](https://github.com/Deepanshi03/re_thread/assets/92084743/3fcc156a-6cc8-4491-b579-cddf16372edd)
- <br>
+
  ![2](https://github.com/Deepanshi03/re_thread/assets/92084743/490f1d2d-f45c-474a-8ad0-78b38ec721e5)
- <br>
+
  ![3](https://github.com/Deepanshi03/re_thread/assets/92084743/e2c7cd01-5c56-4acd-84bb-66066457f22b)
- <br>
+
  ![4](https://github.com/Deepanshi03/re_thread/assets/92084743/2cf80b43-8dd1-4d46-9561-f3448c747ae7)
- <br>
+
  ![5](https://github.com/Deepanshi03/re_thread/assets/92084743/fd9512ea-902c-42e6-a510-aa737bbd76ce)
- <br>
+
  ![6](https://github.com/Deepanshi03/re_thread/assets/92084743/a765df0e-6338-4fa0-8c3c-f945101ae729)
- <br>
+
  ![7](https://github.com/Deepanshi03/re_thread/assets/92084743/00bce876-81b7-49ce-b4ed-abda0389f051)
- <br>
+
  ![8](https://github.com/Deepanshi03/re_thread/assets/92084743/c939168d-544a-4879-8ced-fa2677da2529)
- <br>
+
  ![9](https://github.com/Deepanshi03/re_thread/assets/92084743/0193e935-2427-4231-8848-cb539363d375)
- <br>
+
  ![10](https://github.com/Deepanshi03/re_thread/assets/92084743/6074bad9-dccc-4547-9fb2-50b116663268)
- <br>
+
  ![11](https://github.com/Deepanshi03/re_thread/assets/92084743/59e8667b-4798-4893-9940-f74c1221e761)
- <br>
+
  ![12](https://github.com/Deepanshi03/re_thread/assets/92084743/b1da590b-fbc0-499c-807a-876b5651fba2)
 
 
