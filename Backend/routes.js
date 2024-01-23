@@ -675,7 +675,7 @@ app.get("/user-payment/:id", (req, res) => {
 });
 
 // Route for subcategory's product filter
-app.get("/:category/:subcat/products", (req, res) => {
+app.get("/:category/:subcat/filter-products", (req, res) => {
   const category = req.params.category;
   const subcat = req.params.subcat;
   const color = req.query.color;
@@ -820,5 +820,9 @@ app.delete("/delete-user/:id",(req,res)=>{
 //************************************************************************************
 app.get("/*", (req, res) => {
   res.send("You are on worng route. Here's the list of possible routes");
+<<<<<<< HEAD
+});
+=======
 });
 
+>>>>>>> fe244ea8ebe42faefd30c350b613dbb3343a45b8
