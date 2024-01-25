@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 //********************************** Connection with DB********************************* */
-const uri = "mongodb://127.0.0.1:27017/ReThread";
+const uri = "mongodb+srv://deepanshidey03:ZmYkKdDeo6YDiJDt@cluster0.kwz2v2j.mongodb.net/ReThread";
 mongoose
   .connect(uri)
   .then(() => console.log("MongoDB connected…"))
@@ -178,23 +178,13 @@ const resell = mongoose.model("resell", ResellSchema);
 //*****************************  Sample document entries ****************************/
 const product1 = new products({
   product_name: "Long Trench Coat",
-  category:"Women",
-  sub_cat:"Coats",
+  category:"women",
+  sub_cat:"coats",
   size: "M",
   color: "Grey",
   material:"Wool",
   brand:"Athena",
   price: 450
-});
-const product2 = new products({
-  product_name: "Floral Maxi Dress",
-  category:"Women",
-  sub_cat:"Dresses",
-  size: "S",
-  color: "Peach",
-  material:"Synthetic",
-  brand:"DressBerry",
-  price: 270
 });
 
 const user1 = new users({
@@ -249,8 +239,6 @@ const resell2 = new resell({
 const addDocsToDB = async () => {
   try {
     await product1.save();
-    console.log("Product 1 added successfully!");
-    await product2.save();
     console.log("Product 1 added successfully!");
 
     await user1.save();
