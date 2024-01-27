@@ -1,6 +1,20 @@
+//********************************* Connection Requirements************************************* */
+const express = require("express");
+const app = express();
+const port = 8000;
+app.use(express.json());
+app.listen(port,()=>{
+  console.log(`Server listening at http://localhost:${port}`);
+})
+
+const mongoose = require("mongoose");
+const uri = "mongodb+srv://deepanshidey03:ZmYkKdDeo6YDiJDt@cluster0.kwz2v2j.mongodb.net/";
+mongoose
+  .connect(uri)
+  .then(() => console.log("MongoDB connected…"))
+  .catch((err) => console.log(err));
+
 // ***********************************List of Possible Routes*********************************
-
-
 //***************************************** GET *******************************************
 //Route for Home Page
 app.get("/home",(req,res)=>{
@@ -28,9 +42,14 @@ app.get("/selling/product-form",(req,res)=>{
 })
 
 // Route for all Products Page
-app.get("/all-products",(req,res)=>{
-    res.json(products)
-})
+app.get("/all-products",async(req,res)=>{
+  try {
+    const doc = await products.find();
+    res.json(doc);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 // Route for all Reselling submissions Page
 app.get("/resell-storage",(req,res)=>{
