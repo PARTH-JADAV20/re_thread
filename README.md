@@ -4,7 +4,7 @@
 
 ## Project: ReThread
 ## API Documentation : https://documenter.getpostman.com/view/29752971/2s9YsT6UP7
-## Deployed Link : https://sudentsdatabase.onrender.com/
+## Deployed Link : [https://sudentsdatabase.onrender.com/](https://rethread.onrender.com/)
 <br>
 
 ### Target Problem To Be Solved
