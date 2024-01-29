@@ -2,14 +2,20 @@
   text-align: center;
 }
 
-
-.App-header {
-  background-color: #0f4bc2;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.heading {
+  color: azure;
+  font-size: 85px; /* makes the text bigger */
+  font-weight: bolder; /* makes the text bold */
+  margin-top: 175px; /* pushes the text down */
+  margin-left: 590px;
+  margin-bottom: 0dp;
+}
+.tagline {
+  display: inline;
+  background-color: rgba(0,0,0,0.5);
+  color: azure;
+  font-size: 25px; /* makes the text bigger */
+  font-weight:bold; /* makes the text bold */
+  margin-top: 10px;
+  margin-left: 520px;
 }
