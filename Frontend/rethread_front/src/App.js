@@ -21,7 +21,7 @@ function App() {
           <Route path="/sell" element={<Sell />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="*" element={<p>No Route Found Here</p>} />
+          <Route path="*" element={<p>Page not Found</p>} />
         </Routes>
       </BrowserRouter>
   )
