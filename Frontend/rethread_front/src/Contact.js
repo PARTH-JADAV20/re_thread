@@ -1,57 +1,130 @@
 import React from 'react';
 import Navbar from './Navbar';
-import mainside from "./mainside.png";
-import gliterback from "./gliterback.jpg"
-import Box from '@mui/material/Box';
+import maintop from "./maintop.png";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+import { Link } from '@mui/material';
+import insta from "./insta.webp"
+import linkedin from "./linkedin.jpg"
+import github from "./github.jpg"
+import gmail from "./gmail.webp"
 
 function Contact() {
-  const card = (
-    <React.Fragment>
-      <CardContent>
-        <Typography sx={{ mb: 0.5, color: "black", fontSize: 18, fontFamily:"Roboto"}} color="text.secondary">
-          We’re always here to help! If you have any questions, comments, or concerns, please feel free to reach out to us.<br/><br/>
-
-          <strong>Email:</strong> support@rethread.com<br/>
-          <strong>Phone:</strong> +1 (123) 456-7890<br/>
-          <strong>Address:</strong> Lovely Professional University, Punjab 144411<br/><br/>
-
-          Our customer service team is available Monday through Friday, from <strong>9:00 AM to 5:00 PM.</strong><br/><br/>
-
-          We strive to respond to all inquiries within 24 hours.
-
-        </Typography>
-
-      </CardContent>
-    </React.Fragment>
-  );
   return (
-    <div style={{
-      backgroundImage: `url(${mainside}), url(${gliterback})`, // switches the order of the images
-      backgroundPosition: "right, center", // positions the images
-      backgroundRepeat: "no-repeat, no-repeat", // prevents the images from repeating
-      backgroundSize: "40% 100%, cover", // scales the images
-      height: '100vh', // sets the height to 100% of the viewport height
-      width: '100vw' // sets the width to 100% of the viewport width
-    }}>
+    <div >
       <Navbar />
-      <h1 style={{ fontSize: 60, fontWeight: "bolder", marginLeft: 350, marginTop: 40 , fontFamily:"Roboto"}}>ReThread</h1>
-      <Box sx={{
-        width: 780,
-        marginTop: 3,
-        boxShadow: 8,
-        marginLeft: 9,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start', // aligns the card to the left
-        justifyContent: 'center', // centers the card vertically
+      <img src={maintop} alt="Description of Image" style={{ width: '100%', height: '310px' }} />
+      <h1 style={{
+        position: 'absolute',
+        top: '21%',
+        left: '41%',
+        color: "white",
+        fontSize: 60,
+        fontWeight: 'bolder',
+        fontFamily: 'Roboto'
       }}>
-        <Card variant="outlined" sx={{ backgroundColor:"#f7f4e9" }}>{card}</Card>
-      </Box>
+        Contact Us
+      </h1>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+
+        <Card sx={{ width: 330, marginTop: 3, marginLeft: 1, boxShadow:5  }}>
+          <CardActionArea component={Link} href="https://www.instagram.com/_deepanshidey03_" target="_blank">
+            <CardMedia
+              component="img"
+              height="160"
+              image={insta}
+              alt="green iguana"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                Instagram
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                _deepanshidey03_
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+
+        <Card sx={{ width: 330, marginTop: 3, marginLeft: 3, boxShadow:5  }}>
+          <CardActionArea component={Link} href="https://www.linkedin.com/in/deepanshidey03/" target="_blank">
+            <CardMedia
+              component="img"
+              height="160"
+              image={linkedin}
+              alt="green iguana"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                LinkedIn
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                deepanshidey03
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+
+        <Card sx={{ width: 330, marginTop: 3, marginLeft: 3, boxShadow:5  }}>
+          <CardActionArea component={Link} href="https://github.com/Deepanshi03" target="_blank">
+            <CardMedia
+              component="img"
+              height="160"
+              image={github}
+              alt="green iguana"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                GitHub
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Deepanshi03
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+
+        <Card sx={{ width: 330, marginTop: 3, marginLeft: 3, boxShadow:5  }}>
+          <CardActionArea component={Link} href="https://mail.google.com/mail/?view=cm&fs=1&to=deepanshidey03@gmail.com" target="_blank">
+            <CardMedia
+              component="img"
+              height="160"
+              image={gmail}
+              alt="green iguana"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                Mail Us
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                deepanhsidey03@gmail.com
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+
+        <Card sx={{ width: 330, marginTop: 3, marginLeft: 3, marginRight:1, boxShadow:5 }}>
+          <CardActionArea component={Link} href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d64125.95042934547!2d75.65975046015878!3d31.23914611532172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a5f5e9c489cf3%3A0x4049a5409d53c300!2sLovely%20Professional%20University!5e0!3m2!1sen!2sin!4v1706717693076!5m2!1sen!2sin" target="_blank">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d64125.95042934547!2d75.65975046015878!3d31.23914611532172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a5f5e9c489cf3%3A0x4049a5409d53c300!2sLovely%20Professional%20University!5e0!3m2!1sen!2sin!4v1706717693076!5m2!1sen!2sin" width="100%" height="160" style={{ border: 0 }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                Location
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Lovely Professional University, Punjab
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+
+
+
+      </div>
     </div>
-  )
+  );
 }
 
-export default Contact
+export default Contact;
