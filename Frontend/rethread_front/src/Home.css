@@ -1,0 +1,29 @@
+.App {
+    text-align: center;
+}
+
+.animate__zoomIn {
+    color: azure;
+    font-size: 85px;
+    /* makes the text bigger */
+    font-weight: bolder;
+    /* makes the text bold */
+    margin-top: 175px;
+    /* pushes the text down */
+    margin-left: 590px;
+    margin-bottom: 0dp;
+    animation-name: zoomIn;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: scale3d(.6, .6, .3);
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
