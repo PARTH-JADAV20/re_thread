@@ -3,8 +3,9 @@
 <br>
 
 ## Project: ReThread
+## Website Deployed Link : https://re-thread.netlify.app/
 ## API Documentation : https://documenter.getpostman.com/view/29752971/2s9YsT6UP7
-## Deployed Link : https://rethread.onrender.com/
+## Backend Deployed Link : https://rethread.onrender.com/
 <br>
 
 ### Target Problem To Be Solved
