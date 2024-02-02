@@ -9,7 +9,7 @@ import s5 from './s5.png'
 import arrow from './arrow.png'
 import { Button } from '@mui/material';
 import './Sell.css'
-import { BrowserRouter, Routes, Link } from "react-router-dom"
+import {Link } from "react-router-dom"
 import Footer from './Footer'
 
 function Sell() {

@@ -7,7 +7,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Box, CardActionArea } from '@mui/material';
-import { BrowserRouter as Router, Routes, Link } from "react-router-dom";import women from './women.jpg'
+import {Link } from "react-router-dom";
+import women from './women.jpg'
 import men from './men.avif'
 import kids from './kids.jpg'
 import footwear from './footwear.avif'
@@ -31,7 +32,7 @@ function Shop() {
     <>
       <div>
         <Navbar />
-        <img src={shoptop} alt="Description of Image" style={{ width: '100%', height: '310px' }} />
+        <img src={shoptop}  style={{ width: '100%', height: '310px' }} />
         <h1 style={{
           position: 'absolute',
           top: '21%',

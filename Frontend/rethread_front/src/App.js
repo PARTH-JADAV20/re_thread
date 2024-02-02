@@ -6,6 +6,7 @@ import Shop from './Shop';
 import Products from './Products';
 import Signup from './Signup';
 import Login from './Login';
+import Item from './Item';
 import SellingForm from './SellingForm';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import PageNotFound from './PageNotFound';
@@ -23,6 +24,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/sell" element={<Sell />} />
           <Route path="/selling-form" element={<SellingForm />} />
+          <Route path="/item" element={<Item />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<PageNotFound/>} />
