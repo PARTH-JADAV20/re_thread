@@ -1,36 +1,35 @@
-.App {
-    text-align: center;
+.home-container {
+  background-image: url('./mainback.avif');
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
 }
 
 .animate_zoomIn {
-    color: azure;
-    font-size: 85px;
-    /* makes the text bigger */
-    font-weight: bolder;
-    /* makes the text bold */
-    margin-top: 175px;
-    /* pushes the text down */
-    margin-left: 590px;
-    margin-bottom: 0dp;
-    animation-name: zoomIn;
-    animation-duration: 1s;
-    animation-fill-mode: both;
+  color: azure;
+  font-size: 85px;
+  font-weight: bolder;
+  margin-top: 175px;
+  margin-left: 590px;
+  margin-bottom: 0;
+  animation-name: zoomIn;
+  animation-duration: 1s;
+  animation-fill-mode: both;
 }
 
-
 @keyframes slideInFromTop {
-    0% {
-      opacity: 0;
-      transform: translateY(-50px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
   }
-  
-  .animate_zoomIn {
-    animation: slideInFromTop 1s ease-out; /* Adjust duration and timing function as needed */
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+.animate_zoomIn {
+  animation: slideInFromTop 1s ease-out;
+}
 
   

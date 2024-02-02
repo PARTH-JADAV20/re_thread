@@ -38,7 +38,6 @@ function Contact() {
                 component="img"
                 height="160"
                 image={insta}
-                alt="green iguana"
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -57,7 +56,6 @@ function Contact() {
                 component="img"
                 height="160"
                 image={linkedin}
-                alt="green iguana"
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -76,7 +74,6 @@ function Contact() {
                 component="img"
                 height="160"
                 image={github}
-                alt="green iguana"
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -95,7 +92,7 @@ function Contact() {
                 component="img"
                 height="160"
                 image={gmail}
-                alt="green iguana"
+
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
