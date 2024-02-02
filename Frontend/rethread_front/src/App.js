@@ -3,6 +3,7 @@ import About from './About';
 import Contact from './Contact';
 import Sell from './Sell';
 import Shop from './Shop';
+import Products from './Products';
 import Signup from './Signup';
 import Login from './Login';
 import SellingForm from './SellingForm';
@@ -19,6 +20,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/sell" element={<Sell />} />
           <Route path="/selling-form" element={<SellingForm />} />
           <Route path="/signup" element={<Signup />} />
