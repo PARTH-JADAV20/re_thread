@@ -5,7 +5,9 @@ import Sell from './Sell';
 import Shop from './Shop';
 import Signup from './Signup';
 import Login from './Login';
+import SellingForm from './SellingForm';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
+import PageNotFound from './PageNotFound';
 
 function App() {
   return (
@@ -18,9 +20,10 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/sell" element={<Sell />} />
+          <Route path="/selling-form" element={<SellingForm />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="*" element={<p>Page not Found</p>} />
+          <Route path="*" element={<PageNotFound/>} />
         </Routes>
       </BrowserRouter>
   )

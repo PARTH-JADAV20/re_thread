@@ -2,9 +2,12 @@ import React from 'react';
 import Navbar from './Navbar';
 import maintop from "./maintop.png";
 import perople from "./p1.png"
+import './About.css'
+import Footer from './Footer'
 
 function About() {
   return (
+    <>
     <div>
       <Navbar />
       <img src={maintop} alt="Description of Image" style={{ width: '100%', height: '310px' }} />
@@ -20,7 +23,7 @@ function About() {
         About Us
       </h1>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img src={perople} alt="Description of Image" style={{ width: '50%' }} />
+        <img className="slide-in-image" src={perople} alt="Description of Image" style={{ width: '50%' }} />
         <div style={{ marginLeft: '25px', marginRight:15 }}>
           <h2>Welcome to our platform</h2>
           <p>
@@ -36,6 +39,8 @@ function About() {
       </div>
 
     </div>
+    <Footer />
+    </>
   );
 }
 
