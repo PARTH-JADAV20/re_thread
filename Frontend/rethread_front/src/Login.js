@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
+import Footer from './Footer';
 
 function Login() {
   const card = (
@@ -33,11 +34,12 @@ function Login() {
     </React.Fragment>
   );
   return (
+    <>
     <div style={{
       backgroundImage: `url(${gliterback})`,
       backgroundSize: 'cover', // ensures the image covers the entire div
       height: '100vh', // sets the height to 100% of the viewport height
-      width: '100vw' // sets the width to 100% of the viewport width
+      width: '100%' // sets the width to 100% of the viewport width
     }}>
       <Navbar />
       <h1 style={{ fontSize: 60, fontWeight: "bolder", marginTop: 40, fontFamily: "Roboto", textAlign: "center" }}>ReThread</h1>
@@ -45,6 +47,7 @@ function Login() {
         alignContent: "center",
         width: 480,
         marginTop: 3,
+        marginBottom:1,
         boxShadow: 8,
         marginLeft: 'auto', // centers the box horizontally
         marginRight: 'auto', // centers the box horizontally
@@ -56,6 +59,8 @@ function Login() {
         <Card variant="outlined" sx={{ backgroundColor: '#f7f4e9' }}>{card}</Card>
       </Box>
     </div>
+    <Footer/>
+    </>
   )
 }
 

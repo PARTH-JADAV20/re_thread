@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.animate__zoomIn {
+.animate_zoomIn {
     color: azure;
     font-size: 85px;
     /* makes the text bigger */
@@ -17,13 +17,20 @@
     animation-fill-mode: both;
 }
 
-@keyframes zoomIn {
-    0% {
-        opacity: 0;
-        transform: scale3d(.6, .6, .3);
-    }
 
-    50% {
-        opacity: 1;
+@keyframes slideInFromTop {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
     }
-}
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate_zoomIn {
+    animation: slideInFromTop 1s ease-out; /* Adjust duration and timing function as needed */
+  }
+
+  
