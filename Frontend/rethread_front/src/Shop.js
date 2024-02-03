@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Navbar from './Navbar'
 import Footer from './Footer'
 import shoptop from './shoptop.jpg'
@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Box, CardActionArea } from '@mui/material';
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import women from './women.jpg'
 import men from './men.avif'
 import kids from './kids.jpg'
@@ -26,13 +26,42 @@ import dis2 from './dis2.jpg'
 import dis3 from './dis3.jpg'
 import dis4 from './dis4.jpg'
 import dis5 from './dis5.jpg'
+import IconButton from '@mui/material/IconButton';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 function Shop() {
+
+  const [marginLeft, setMarginLeft] = useState(0);
+
+  const trendImages = [
+    { image: trend1, title: "Women's Long Coat" },
+    { image: trend2, title: "Men's Suit" },
+    { image: trend3, title: "Gradient Shades" },
+    { image: trend4, title: "Couple Rings" },
+    { image: trend5, title: "Premium Wallet" },
+    { image: trend6, title: "Combat Boots" },
+    { image: trend7, title: "Jhumkas" },
+    { image: trend8, title: "Leather Bracelets" },
+    { image: trend2, title: "Men's Blazer" }
+    // Add more trend objects as needed
+  ];
+  const cardsToShow = 5; // Number of cards to show at a time
+  const totalCards = trendImages.length;
+  
+  const handleLeftClick = () => {
+    setMarginLeft((prevMargin) => Math.max(prevMargin - 1, 0));
+  };
+  
+  const handleRightClick = () => {
+    const maxMargin = totalCards - cardsToShow;
+    setMarginLeft((prevMargin) => Math.min(prevMargin + 1, maxMargin));
+  };
+
   return (
     <>
       <div>
-        <Navbar />
-        <img src={shoptop}  style={{ width: '100%', height: '310px' }} />
+        <img src={shoptop} style={{ width: '100%', height: '310px' }} />
         <h1 style={{
           position: 'absolute',
           top: '21%',
@@ -153,133 +182,50 @@ function Shop() {
           marginBottom: 3,
           marginRight: 'auto',
           display: 'flex',
+          overflowX:'hidden',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
         }}>
           <h2>Shop By Trending</h2>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={trend1}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Women's Long Coat
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={trend2}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Men's Suit
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={trend3}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Gradient Shades
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={trend4}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Couple Rings
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginRight: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={trend5}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Premium Wallet
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginRight: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={trend6}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Combat Boots
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginRight: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={trend7}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Jhumkas
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginRight: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={trend8}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    leather Bracelets
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+          <div style={{ display: 'flex', flexDirection: 'row', marginLeft: -marginLeft * 270 }}>
+            {trendImages.slice(marginLeft, marginLeft + 5).map((trend, index) => (
+              <Card
+                key={index}
+                className='animate_from_bottom'
+                sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}
+              >
+                <CardActionArea component={Link} to="/products" target="_blank">
+                  <CardMedia component="img" height="180" image={trend.image} />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {trend.title}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            ))}
           </div>
-        </Box >
+
+          <IconButton sx={{
+            backgroundColor: 'black',
+            color: 'white',
+            '&:hover': {
+              backgroundColor: 'darkgrey'}
+          }} 
+          onClick={handleLeftClick} disabled={marginLeft === 0}>
+            <KeyboardArrowLeftIcon />
+          </IconButton>
+          <IconButton sx={{
+            backgroundColor: 'black',
+            color: 'white',
+            '&:hover': {
+              backgroundColor: 'darkgrey'}
+          }} 
+          onClick={handleRightClick} disabled={marginLeft >= trendImages.length - 5}>
+            <KeyboardArrowRightIcon />
+          </IconButton>
+        </Box>
 
         <Box sx={{
           alignContent: "center",

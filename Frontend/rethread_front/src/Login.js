@@ -1,5 +1,4 @@
-import React from 'react'
-import Navbar from './Navbar'
+import React, { useState } from 'react'
 import gliterback from "./gliterback.jpg"
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -8,58 +7,155 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import Footer from './Footer';
-
+import customerImage from "./customer.png";
+import adminImage from "./admin.png";
+import './Login.css'
 function Login() {
-  const card = (
-    <React.Fragment>
-      <CardContent sx={{ width: 400, display: "flex", flexDirection: "Column", alignContent: "center" }}>
-        <Typography sx={{ mb: 0.5, color: "black", fontSize: 25, fontFamily: "Roboto", textAlign: "center" }} color="text.secondary">Login</Typography>
-        <TextField id="outlined-basic" label="Email" variant="outlined" sx={{ alignContent: "center", marginTop: 2 }} />
-        <TextField id="outlined-basic" label="Password" variant="outlined" sx={{ alignContent: "center", marginTop: 2 }} />
-        <Button sx={{
-          backgroundColor: '#4d3d18',
-          color: 'white',
-          '&:hover': {
-            backgroundColor: '#3b2e12',
-          },
-          padding: '10px 20px',
-          borderRadius: '5px',
-          marginTop:3,
-          fontSize: '16px',
-          fontWeight: 'bold',
-        }}>
-            Login
-        </Button>
-      </CardContent>
-    </React.Fragment>
-  );
+
+  const [accountType, setAccountType] = useState('');
+  const handleAccountTypeClick = (type) => {
+    setAccountType(type);
+  }
+
   return (
     <>
-    <div style={{
-      backgroundImage: `url(${gliterback})`,
-      backgroundSize: 'cover', // ensures the image covers the entire div
-      height: '100vh', // sets the height to 100% of the viewport height
-      width: '100%' // sets the width to 100% of the viewport width
-    }}>
-      <Navbar />
-      <h1 style={{ fontSize: 60, fontWeight: "bolder", marginTop: 40, fontFamily: "Roboto", textAlign: "center" }}>ReThread</h1>
-      <Box sx={{
-        alignContent: "center",
-        width: 480,
-        marginTop: 3,
-        marginBottom:1,
-        boxShadow: 8,
-        marginLeft: 'auto', // centers the box horizontally
-        marginRight: 'auto', // centers the box horizontally
+      <div style={{
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center', // centers the card horizontally
-        justifyContent: 'center', // centers the card vertically
+        flexDirection: 'row',
       }}>
-        <Card variant="outlined" sx={{ backgroundColor: '#f7f4e9' }}>{card}</Card>
-      </Box>
-    </div>
-    <Footer/>
+        {/* Left part of the screen */}
+        <div style={{
+          backgroundImage: `url(${gliterback})`,
+          marginTop: '10px',
+          backgroundSize: 'cover',
+          height: '100vh',
+          width: '50%', // Use 50% to take half of the screen
+        }}>
+          <h3 style={{ fontSize: 40, fontWeight: "bolder", paddingTop: '30px', marginTop: 30, textAlign: "left", marginLeft: '175px' }}>Choose Account Type</h3>
+          <div style={{ display: 'flex', justifyContent: 'center', marginLeft: '10px', marginTop: '40px' }}>
+            <div className='zoom_in'
+              onClick={() => handleAccountTypeClick('customer')}
+              style={{
+                cursor: 'pointer',
+                border: accountType === 'customer' ? '3px solid black' : 'none',
+                borderRadius: '5px',
+                padding: '5px',
+                marginRight: '10px'
+              }}
+              onMouseOver={(e) => {
+                if (accountType !== 'customer') {
+                  e.currentTarget.style.border = '2px solid grey';
+                }
+              }}
+              onMouseOut={(e) => {
+                if (accountType !== 'customer') {
+                  e.currentTarget.style.border = 'none';
+                }
+              }}
+              onMouseDown={(e) => {
+                if (accountType !== 'customer') {
+                  e.currentTarget.style.border = '3px solid black';
+                }
+              }}
+              onMouseUp={(e) => {
+                if (accountType !== 'customer') {
+                  e.currentTarget.style.border = '2px solid transparent';
+                }
+              }}
+            >
+              <img src={customerImage} alt="Customer" style={{ width: 200, height: 300 }} />
+              <p style={{ textAlign: 'center', marginTop: 10, fontSize: 20 }}>Customer</p>
+            </div>
+            <div className='zoom_in'
+              onClick={() => handleAccountTypeClick('admin')}
+              style={{
+                cursor: 'pointer',
+                border: accountType === 'admin' ? '3px solid black' : 'none',
+                borderRadius: '5px',
+                padding: '5px',
+                marginLeft: '20px'
+              }}
+              onMouseOver={(e) => {
+                if (accountType !== 'admin') {
+                  e.currentTarget.style.border = '2px solid grey';
+                }
+              }}
+              onMouseOut={(e) => {
+                if (accountType !== 'admin') {
+                  e.currentTarget.style.border = 'none';
+                }
+              }}
+              onMouseDown={(e) => {
+                if (accountType !== 'admin') {
+                  e.currentTarget.style.border = '3px solid black';
+                }
+              }}
+              onMouseUp={(e) => {
+                if (accountType !== 'admin') {
+                  e.currentTarget.style.border = '2px solid transparent';
+                }
+              }}
+            >
+              <img src={adminImage} alt="Admin" style={{ width: 150, height: 300, paddingLeft: '32px' }} />
+              <p style={{ textAlign: 'center', marginRight: '15px', marginTop: 10, fontSize: 20 }}>Admin</p>
+            </div>
+          </div>
+          <Button sx={{
+            backgroundColor: '#4d3d18',
+            color: 'white',
+            '&:hover': {
+              backgroundColor: '#3b2e12',
+            },
+            padding: '10px 20px',
+            borderRadius: '5px',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            marginLeft: '290px',
+            marginTop: '20px'
+          }} onClick={() => handleAccountTypeClick('')}>
+            Clear Selection
+          </Button>
+        </div>
+
+
+        <Box sx={{
+          width: 750,
+          marginTop: '10px',
+          marginBottom: 1,
+          boxShadow: 8,
+          backgroundColor: '#4d3d18',
+          marginLeft: 'auto', // centers the box horizontally
+          marginRight: '0px', // centers the box horizontally
+          display: 'flex',
+          height: '100vh',
+          flexDirection: 'column',
+          alignItems: 'center', // centers the card horizontally
+          justifyContent: 'center', // centers the card vertically
+        }}>
+          <Card variant="outlined" sx={{ backgroundColor: '#f7f4e9', marginTop: '-70px' }}>
+            <CardContent sx={{ width: 400, display: "flex", flexDirection: "Column", alignContent: "center" }}>
+              <Typography sx={{ mb: 0.5, color: "black", fontSize: 25, fontFamily: "Roboto", textAlign: "center" }} color="text.secondary">Login</Typography>
+              <TextField id="outlined-basic" label="Email" variant="outlined" sx={{ alignContent: "center", marginTop: 2 }} />
+              <TextField id="outlined-basic" label="Password" variant="outlined" sx={{ alignContent: "center", marginTop: 2 }} />
+              <Button sx={{
+                backgroundColor: '#4d3d18',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: '#3b2e12',
+                },
+                padding: '10px 20px',
+                borderRadius: '5px',
+                marginTop: 3,
+                fontSize: '16px',
+                fontWeight: 'bold',
+              }}>
+                Login
+              </Button>
+            </CardContent>
+          </Card>
+        </Box>
+      </div>
+      <Footer />
     </>
   )
 }

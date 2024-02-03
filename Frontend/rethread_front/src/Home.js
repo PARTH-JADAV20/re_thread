@@ -7,7 +7,6 @@ function Home() {
   return (
     <>
       <div className="home-container">
-        <Navbar />
         <div>
           <h1 className='animate_zoomIn'>ReThread</h1>
         </div>

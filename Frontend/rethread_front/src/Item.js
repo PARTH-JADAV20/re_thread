@@ -90,7 +90,7 @@ function Item() {
                                 fontWeight: 'bold',
                             }}
                         >
-                            <Link to="/selling-form" style={{ textDecoration: 'none', color: 'white' }}>
+                            <Link to="/cart" style={{ textDecoration: 'none', color: 'white' }}>
                                 ADD TO CART
                             </Link>
                         </Button>
@@ -109,7 +109,7 @@ function Item() {
                                 fontWeight: 'bold',
                             }}
                         >
-                            <Link to="/selling-form" style={{ textDecoration: 'none', color: 'white' }}>
+                            <Link to="/cart" style={{ textDecoration: 'none', color: 'white' }}>
                                 Buy Now
                             </Link>
                         </Button>
