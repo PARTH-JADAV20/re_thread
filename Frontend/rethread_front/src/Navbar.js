@@ -1,4 +1,5 @@
-import * as React from 'react';   // includes useStake hook
+import * as React from 'react';
+import { useState } from 'react'; // Import useState hook
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,16 +9,16 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { BrowserRouter as Router, Routes, Link } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import './Navbar.css'
 
 export default function Navbar() {
-    // State to manage the item count
-    const [cartItemCount, setCartItemCount] = React.useState(0);
+  const cartItemCount = 0;
+  const [currentButton, setCurrentButton] = useState(''); // State to keep track of the current button
 
-    // Example function to increment the item count (replace with your actual logic)
-    const incrementItemCount = () => {
-      setCartItemCount(prevCount => prevCount + 1);
-    };
-  
+  const handleButtonClick = (buttonName, event) => {
+    setCurrentButton(buttonName); // Update the state with the clicked button
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -27,15 +28,50 @@ export default function Navbar() {
             <Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>ReThread</Link>
           </Typography>
 
-          <Button color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }}><Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>Home</Link></Button>
-          <Button color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }}><Link to="/about" style={{ textDecoration: 'none', color: 'black' }}>About Us</Link></Button>
-          <Button color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }}><Link to="/contact" style={{ textDecoration: 'none', color: 'black' }}>Contact</Link></Button>
-          <Button color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }}><Link to="/shop" style={{ textDecoration: 'none', color: 'black' }}>Shop</Link></Button>
-          <Button color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }}><Link to="/sell" style={{ textDecoration: 'none', color: 'black' }}>Sell</Link></Button>
-          <Button className='SignUpBtn' color="inherit" sx={{ color: "black", fontWeight: 'bold', backgroundColor: 'lightgrey', mx: 1 }}><Link to="/signup" style={{ textDecoration: 'none', color: 'black' }}>Sign Up</Link></Button>
-          <Button className='LoginBtn' color="inherit" sx={{ color: "black", fontWeight: 'bold', backgroundColor: 'lightgray', mx: 1 }}><Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>Login</Link></Button>
+          <NavLink to="/home" style={{ textDecoration: 'none', color: 'black' }}>
+            <Button className={currentButton === 'home' ? 'current' : ''} color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }} onClick={() => handleButtonClick('home')}>
+              Home
+            </Button>
+          </NavLink>
 
-          <IconButton color="inherit" onClick={incrementItemCount}>
+          <NavLink to="/about" style={{ textDecoration: 'none', color: 'black' }}>
+            <Button className={currentButton === 'aboutUs' ? 'current' : ''} color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }} onClick={() => handleButtonClick('aboutUs')}>
+              About Us
+            </Button>
+          </NavLink>
+
+          <NavLink to="/contact" style={{ textDecoration: 'none', color: 'black' }}>
+            <Button className={currentButton === 'contact' ? 'current' : ''} color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }} onClick={() => handleButtonClick('contact')}>
+              Contact
+            </Button>
+          </NavLink>
+
+          <NavLink to="/shop" style={{ textDecoration: 'none', color: 'black' }}>
+            <Button className={currentButton === 'shop' ? 'current' : ''} color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }} onClick={() => handleButtonClick('shop')}>
+              Shop
+            </Button>
+          </NavLink>
+
+          <NavLink to="/sell" style={{ textDecoration: 'none', color: 'black' }}>
+            <Button className={currentButton === 'sell' ? 'current' : ''} color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }} onClick={() => handleButtonClick('sell')}>
+              Sell
+            </Button>
+          </NavLink>
+
+          <NavLink to="/signup" style={{ textDecoration: 'none', color: 'black' }}>
+            <Button className={currentButton === 'signup' ? 'current' : ''} color="inherit" sx={{ color: "black", fontWeight: 'bold', backgroundColor: 'lightgrey', mx: 1 }} onClick={() => handleButtonClick('signup')}>
+              Sign Up
+            </Button>
+          </NavLink>
+
+          <NavLink to="/login" style={{ textDecoration: 'none', color: 'black' }}>
+            <Button className={currentButton === 'login' ? 'current' : ''} color="inherit" sx={{ color: "black", fontWeight: 'bold', backgroundColor: 'lightgray', mx: 1 }} onClick={() => handleButtonClick('login')}>
+              Login
+            </Button>
+          </NavLink>
+
+
+          <IconButton color="inherit" component={Link} to='/cart'>
             <Badge badgeContent={cartItemCount} color="error">
               <ShoppingCartIcon />
             </Badge>

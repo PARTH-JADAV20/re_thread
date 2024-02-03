@@ -18,7 +18,6 @@ function Contact() {
   return (
     <>
       <div >
-        <Navbar />
         <img src={maintop} alt="Description of Image" style={{ width: '100%', height: '310px' }} />
         <h1 style={{
           position: 'absolute',

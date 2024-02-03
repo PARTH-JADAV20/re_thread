@@ -9,7 +9,6 @@ function About() {
   return (
     <>
       <div>
-        <Navbar />
         <img src={maintop} alt="Description of Image" className="main-image" />
         <h1 className="about-heading">
           About Us

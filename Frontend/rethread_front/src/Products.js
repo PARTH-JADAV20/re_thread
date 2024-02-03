@@ -225,7 +225,6 @@ function Products() {
         </div>
 
         <div style={{ flex: 1, padding: '20px' }}>
-          <Navbar />
           <h1>Showing Results for Products</h1>
 
           <Box

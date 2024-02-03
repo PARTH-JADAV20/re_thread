@@ -43,24 +43,24 @@ function Shop() {
     { image: trend6, title: "Combat Boots" },
     { image: trend7, title: "Jhumkas" },
     { image: trend8, title: "Leather Bracelets" },
+    { image: trend2, title: "Men's Blazer" }
     // Add more trend objects as needed
   ];
   const cardsToShow = 5; // Number of cards to show at a time
-
+  const totalCards = trendImages.length;
+  
   const handleLeftClick = () => {
     setMarginLeft((prevMargin) => Math.max(prevMargin - 1, 0));
   };
-  const totalCards = trendImages.length;
   
   const handleRightClick = () => {
-    const maxMargin = Math.max(0, totalCards - cardsToShow);
+    const maxMargin = totalCards - cardsToShow;
     setMarginLeft((prevMargin) => Math.min(prevMargin + 1, maxMargin));
   };
 
   return (
     <>
       <div>
-        <Navbar />
         <img src={shoptop} style={{ width: '100%', height: '310px' }} />
         <h1 style={{
           position: 'absolute',
