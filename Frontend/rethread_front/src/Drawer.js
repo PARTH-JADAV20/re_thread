@@ -12,8 +12,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
+import { Link } from 'react-router-dom'
 
 export default function TemporaryDrawer() {
     const [state, setState] = React.useState({
@@ -39,7 +39,7 @@ export default function TemporaryDrawer() {
             {/* Top section with username and ReThread earning */}
             <Box sx={{ padding: '16px', backgroundColor: '#4d3d18', textAlign: 'center', color: 'white' }}>
                 <Avatar />
-                <Typography variant="subtitle1" sx={{ marginTop: '8px', fontWeight: 'bold' , fontSize:'22px'}}>
+                <Typography variant="subtitle1" sx={{ marginTop: '8px', fontWeight: 'bold', fontSize: '22px' }}>
                     User {/* Replace with the actual username */}
                 </Typography>
                 <Typography variant="body2">
@@ -49,9 +49,9 @@ export default function TemporaryDrawer() {
 
 
             <List>
-                {['Profile', 'Orders'].map((text, index) => (
+                {['Profile', 'My-Orders'].map((text, index) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton component={Link} to={`./${text.toLowerCase()}`}>
                             <ListItemIcon>
                                 {index % 2 === 0 ? <AccountCircle /> : <LocalShippingIcon />}
                             </ListItemIcon>
@@ -62,11 +62,12 @@ export default function TemporaryDrawer() {
             </List>
             <Divider />
             <List>
-                {['View User Details', 'Modify User Details', 'View Product Details','Modify Products Details'].map((text, index) => (
+                {['Modify User Details', 'Modify Product Details'].map((text, index) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton component={Link} to={`./${text.replace(/\s+/g, '-').toLowerCase()}`}>
+                            {/* Replace spaces with hyphens and convert to lowercase for better URLs */}
                             <ListItemIcon>
-                                {index % 2 === 0 ? <VisibilityIcon /> : <EditIcon />}
+                                <EditIcon />
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>

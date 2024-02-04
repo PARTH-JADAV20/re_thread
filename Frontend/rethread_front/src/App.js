@@ -12,6 +12,10 @@ import Cart from './Cart'
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import PageNotFound from './PageNotFound';
 import Navbar from './Navbar';
+import Profile from './Profile';
+import Orders from './Orders';
+import ModifyUserDetails from './ModifyUserDetails';
+import ModifyProductDetails from './ModifyProductDetails';
 
 function App() {
   return (
@@ -31,6 +35,10 @@ function App() {
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/my-orders" element={<Orders />} />
+          <Route path="/modify-user-details" element={<ModifyUserDetails />} />
+          <Route path="/modify-product-details" element={<ModifyProductDetails />} />
           <Route path="*" element={<PageNotFound/>} />
         </Routes>
       </BrowserRouter>

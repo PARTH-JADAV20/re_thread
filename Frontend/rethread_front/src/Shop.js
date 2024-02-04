@@ -108,7 +108,7 @@ function Shop() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
+              <CardActionArea component={Link} to="/products">
                 <CardMedia
                   component="img"
                   height="180"
@@ -124,7 +124,7 @@ function Shop() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
+              <CardActionArea component={Link} to="/products">
                 <CardMedia
                   component="img"
                   height="180"
@@ -140,7 +140,7 @@ function Shop() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
+              <CardActionArea component={Link} to="/products">
                 <CardMedia
                   component="img"
                   height="180"
@@ -156,7 +156,7 @@ function Shop() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginRight: 2, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
+              <CardActionArea component={Link} to="/products">
                 <CardMedia
                   component="img"
                   height="180"
@@ -210,7 +210,7 @@ function Shop() {
                 className='animate_from_bottom'
                 sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}
               >
-                <CardActionArea component={Link} to="/products" target="_blank">
+                <CardActionArea component={Link} to="/products">
                   <CardMedia component="img" height="180" image={trend.image} />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
@@ -255,7 +255,7 @@ function Shop() {
           <h2>Products On Discount</h2>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
+              <CardActionArea component={Link} to="/products">
                 <CardMedia
                   component="img"
                   height="180"
@@ -271,7 +271,7 @@ function Shop() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
+              <CardActionArea component={Link} to="/products">
                 <CardMedia
                   component="img"
                   height="180"
@@ -287,7 +287,7 @@ function Shop() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
+              <CardActionArea component={Link} to="/products">
                 <CardMedia
                   component="img"
                   height="180"
@@ -303,7 +303,7 @@ function Shop() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
+              <CardActionArea component={Link} to="/products">
                 <CardMedia
                   component="img"
                   height="180"
@@ -319,7 +319,7 @@ function Shop() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginRight: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products" target="_blank">
+              <CardActionArea component={Link} to="/products">
                 <CardMedia
                   component="img"
                   height="180"
