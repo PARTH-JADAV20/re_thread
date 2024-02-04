@@ -9,15 +9,26 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { BrowserRouter as Router, Routes, Link } from "react-router-dom";
+import Drawer from './Drawer';
 import { NavLink } from 'react-router-dom';
 import './Navbar.css'
 
 export default function Navbar() {
   const cartItemCount = 0;
   const [currentButton, setCurrentButton] = useState(''); // State to keep track of the current button
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleButtonClick = (buttonName, event) => {
     setCurrentButton(buttonName); // Update the state with the clicked button
+  };
+
+
+  const handleDrawerOpen = () => {
+    setIsDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setIsDrawerOpen(false);
   };
 
   return (
@@ -71,11 +82,16 @@ export default function Navbar() {
           </NavLink>
 
 
-          <IconButton color="inherit" component={Link} to='/cart'>
+          <IconButton className={currentButton === 'cart' ? 'current' : ''} color="inherit" component={Link} to='/cart' onClick={() => handleButtonClick('cart')}>
             <Badge badgeContent={cartItemCount} color="error">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
+
+          {/* Drawer Component */}
+          <Drawer open={isDrawerOpen} onClose={handleDrawerClose} />
+
+
         </Toolbar>
       </AppBar>
     </Box>

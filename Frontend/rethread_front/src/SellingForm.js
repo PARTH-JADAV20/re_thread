@@ -17,7 +17,8 @@ function SellingForm() {
       <div style={{
         backgroundImage: `url(${gliterback})`,
         backgroundSize: 'cover',
-        height: '100%',
+        backgroundAttachment: 'fixed',
+        height: '810px',
         width: '100%',
         paddingTop: '1px',  // Adjust the top padding to create space at the top
       }}>
@@ -156,8 +157,8 @@ function SellingForm() {
           },
           padding: '10px 20px',
           borderRadius: '5px',
-          marginTop: '10px',
-          marginBottom: '3px',
+          marginTop: '20px',
+          marginBottom: '20px',
           fontSize: '16px',
           fontWeight: 'bold',
           alignItems: 'center',

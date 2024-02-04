@@ -9,6 +9,7 @@ import { Button } from '@mui/material';
 import Footer from './Footer';
 import customerImage from "./customer.png";
 import adminImage from "./admin.png";
+import arrow from './arrow.png'
 import './Login.css'
 function Login() {
 
@@ -116,6 +117,8 @@ function Login() {
             Clear Selection
           </Button>
         </div>
+
+        <img src={arrow} alt="arrow 1" style={{ width: '8%', height: 150, marginLeft: 10 ,position:'absolute',zIndex: 1,top: '290px', left:'700px'}} />
 
 
         <Box sx={{

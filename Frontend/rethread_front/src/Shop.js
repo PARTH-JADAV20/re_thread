@@ -34,6 +34,8 @@ function Shop() {
 
   const [marginLeft, setMarginLeft] = useState(0);
 
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   const trendImages = [
     { image: trend1, title: "Women's Long Coat" },
     { image: trend2, title: "Men's Suit" },
@@ -46,16 +48,14 @@ function Shop() {
     { image: trend2, title: "Men's Blazer" }
     // Add more trend objects as needed
   ];
-  const cardsToShow = 5; // Number of cards to show at a time
-  const totalCards = trendImages.length;
-  
-  const handleLeftClick = () => {
-    setMarginLeft((prevMargin) => Math.max(prevMargin - 1, 0));
+
+
+  const handlePrevSlide = () => {
+    setCurrentSlide((prevSlide) => Math.max(prevSlide - 1, 0));
   };
-  
-  const handleRightClick = () => {
-    const maxMargin = totalCards - cardsToShow;
-    setMarginLeft((prevMargin) => Math.min(prevMargin + 1, maxMargin));
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % trendImages.length);
   };
 
   return (
@@ -182,14 +182,29 @@ function Shop() {
           marginBottom: 3,
           marginRight: 'auto',
           display: 'flex',
-          overflowX:'hidden',
+          overflowX: 'hidden',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
         }}>
           <h2>Shop By Trending</h2>
-          <div style={{ display: 'flex', flexDirection: 'row', marginLeft: -marginLeft * 270 }}>
-            {trendImages.slice(marginLeft, marginLeft + 5).map((trend, index) => (
+          <IconButton sx={{
+            backgroundColor: 'black',
+            color: 'white',
+            position:'absolute',
+            top:'1040px',
+            zIndex:1,
+            left:'30px',
+            '&:hover': {
+              backgroundColor: 'darkgrey'
+            }
+          }}
+            onClick={handlePrevSlide}>
+            <KeyboardArrowLeftIcon />
+          </IconButton>
+
+          <div style={{ display: 'flex', flexDirection: 'row', marginRight:'23px' }}>
+            {trendImages.slice(currentSlide, currentSlide + 5).map((trend, index) => (
               <Card
                 key={index}
                 className='animate_from_bottom'
@@ -207,22 +222,19 @@ function Shop() {
             ))}
           </div>
 
+
           <IconButton sx={{
             backgroundColor: 'black',
             color: 'white',
+            position:'absolute',
+            top:'1040px',
+            right:'30px',
+            zIndex:1,
             '&:hover': {
-              backgroundColor: 'darkgrey'}
-          }} 
-          onClick={handleLeftClick} disabled={marginLeft === 0}>
-            <KeyboardArrowLeftIcon />
-          </IconButton>
-          <IconButton sx={{
-            backgroundColor: 'black',
-            color: 'white',
-            '&:hover': {
-              backgroundColor: 'darkgrey'}
-          }} 
-          onClick={handleRightClick} disabled={marginLeft >= trendImages.length - 5}>
+              backgroundColor: 'darkgrey'
+            }
+          }}
+            onClick={handleNextSlide} disabled={marginLeft >= trendImages.length - 5}>
             <KeyboardArrowRightIcon />
           </IconButton>
         </Box>
