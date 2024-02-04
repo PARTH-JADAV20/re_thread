@@ -4,7 +4,7 @@ import pnf from './pnf.avif';
 
 function PageNotFound() {
   return (
-    <div style={{ textAlign: 'center', paddingTop: '100px' }}>
+    <div style={{ textAlign: 'center', paddingTop: '50px' }}>
       <img src={pnf} alt="404 Not Found" style={{ maxWidth: '100%' }} />
       <h1>Oops! Page Not Found</h1>
       <p>The page you are looking for might be under construction or does not exist.</p>

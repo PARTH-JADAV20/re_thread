@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Footer from './Footer';
-import Navbar from './Navbar';
 import trend3 from './trend3.jpg'
 import { Button } from '@mui/material';
 import { Link } from "react-router-dom"
@@ -13,7 +12,7 @@ function Item() {
     };
     return (
         <>
-            <Navbar />
+
             <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '40px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '80px', marginTop: '40px' }}>
                     {/* First Clickable Image */}
@@ -75,8 +74,8 @@ function Item() {
                     <p>Short product description goes here...</p>
 
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '40px' }}>
-                        <Button
-                            sx={{
+                        <Link to="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <Button sx={{
                                 backgroundColor: '#4d3d18',
                                 color: 'white',
                                 '&:hover': {
@@ -84,35 +83,40 @@ function Item() {
                                 },
                                 padding: '10px 20px',
                                 borderRadius: '5px',
-                                width: '60%',
-                                marginBottom: '10px',
+                                marginTop: '30px',
+                                marginBottom: '5px',
                                 fontSize: '16px',
                                 fontWeight: 'bold',
-                            }}
-                        >
-                            <Link to="/cart" style={{ textDecoration: 'none', color: 'white' }}>
+                                alignItems: 'center',
+                                width: '110%',
+                                display: 'block',
+                            }}>
                                 ADD TO CART
-                            </Link>
-                        </Button>
+                            </Button>
+                        </Link>
 
-                        <Button
-                            sx={{
-                                backgroundColor: '#4d3d18',
-                                color: 'white',
+                        <Link to="/checkout" style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <Button sx={{
+                                backgroundColor: 'white',
+                                color: '#4d3d18',
+                                border: '2px solid #4d3d18',
                                 '&:hover': {
-                                    backgroundColor: '#3b2e12',
+                                    backgroundColor: '#f0f0f0',
                                 },
                                 padding: '10px 20px',
                                 borderRadius: '5px',
-                                width: '60%',
+                                marginTop: '5px',
+                                marginBottom: '20px',
                                 fontSize: '16px',
                                 fontWeight: 'bold',
-                            }}
-                        >
-                            <Link to="/cart" style={{ textDecoration: 'none', color: 'white' }}>
-                                Buy Now
-                            </Link>
-                        </Button>
+                                alignItems: 'center',
+                                marginLeft:'-8px',
+                                width: '130%',
+                                display: 'block',
+                            }}>
+                                BUY NOW
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>
