@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Checkbox, TextField, IconButton, InputAdornment, FormGroup, FormControlLabel } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import Navbar from './Navbar';
 import Slider from '@mui/material/Slider';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -240,7 +239,7 @@ function Products() {
             }}
           >
             <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item" target="_blank">
+              <CardActionArea component={Link} to="/item">
                 <CardMedia
                   component="img"
                   height="190"
@@ -263,7 +262,7 @@ function Products() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item" target="_blank">
+              <CardActionArea component={Link} to="/item">
                 <CardMedia
                   component="img"
                   height="190"
@@ -286,7 +285,7 @@ function Products() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item" target="_blank">
+              <CardActionArea component={Link} to="/item">
                 <CardMedia
                   component="img"
                   height="190"
@@ -309,7 +308,7 @@ function Products() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item" target="_blank">
+              <CardActionArea component={Link} to="/item">
                 <CardMedia
                   component="img"
                   height="190"
@@ -332,7 +331,7 @@ function Products() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item" target="_blank">
+              <CardActionArea component={Link} to="/item">
                 <CardMedia
                   component="img"
                   height="190"
@@ -355,7 +354,7 @@ function Products() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item" target="_blank">
+              <CardActionArea component={Link} to="/item">
                 <CardMedia
                   component="img"
                   height="190"
@@ -378,7 +377,7 @@ function Products() {
             </Card>
 
             <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item" target="_blank">
+              <CardActionArea component={Link} to="/item">
                 <CardMedia
                   component="img"
                   height="190"
@@ -402,7 +401,7 @@ function Products() {
 
             
             <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item" target="_blank">
+              <CardActionArea component={Link} to="/item">
                 <CardMedia
                   component="img"
                   height="190"

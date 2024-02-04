@@ -139,8 +139,9 @@ function Login() {
             <CardContent sx={{ width: 400, display: "flex", flexDirection: "Column", alignContent: "center" }}>
               <Typography sx={{ mb: 0.5, color: "black", fontSize: 25, fontFamily: "Roboto", textAlign: "center" }} color="text.secondary">Sign Up</Typography>
               <TextField id="outlined-basic" label="Name" variant="outlined" sx={{ alignContent: "center", marginTop: 2 }} />
+              <TextField id="outlined-basic" label="Mobile" type='number' variant="outlined" sx={{ alignContent: "center", marginTop: 2 }} />
               <TextField id="outlined-basic" label="Address" variant="outlined" sx={{ alignContent: "center", marginTop: 2 }} />
-              <TextField id="outlined-basic" label="Email" variant="outlined" sx={{ alignContent: "center", marginTop: 2 }} />
+              <TextField id="outlined-basic" label="Email" type='email' variant="outlined" sx={{ alignContent: "center", marginTop: 2 }} />
               <TextField id="outlined-basic" label="Password" variant="outlined" sx={{ alignContent: "center", marginTop: 2 }} />
               <Button sx={{
                 backgroundColor: '#4d3d18',
