@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from './Navbar'
 import Footer from './Footer'
 import shoptop from './shoptop.jpg'
 import Card from '@mui/material/Card';
@@ -21,6 +20,7 @@ import trend5 from './trend5.webp'
 import trend6 from './trend6.webp'
 import trend7 from './trend7.jpg'
 import trend8 from './trend8.avif'
+import './Shop.css'
 import dis1 from './dis1.jpg'
 import dis2 from './dis2.jpg'
 import dis3 from './dis3.jpg'
@@ -29,12 +29,24 @@ import dis5 from './dis5.jpg'
 import IconButton from '@mui/material/IconButton';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import SimpleImageSlider from "react-simple-image-slider";
+
 
 function Shop() {
 
   const [marginLeft, setMarginLeft] = useState(0);
 
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const images = [
+    { url: shoptop },
+    { url: "./trend1.jpg"},
+    { url: "./trend1.jpg"},
+    { url: "./trend1.jpg" },
+    { url: "./trend1.jpg" },
+  ];
+
+
 
   const trendImages = [
     { image: trend1, title: "Women's Long Coat" },
@@ -60,150 +72,112 @@ function Shop() {
 
   return (
     <>
-      <div>
-        <img src={shoptop} style={{ width: '100%', height: '310px' }} />
-        <h1 style={{
-          position: 'absolute',
-          top: '21%',
-          left: '35%',
-          color: "white",
-          alignItems: 'center',
-          textAlign: 'center',
-          fontSize: 60,
-          fontWeight: 'bolder',
-          fontFamily: 'Roboto'
-        }}>
-          20% Off On Jackets
-        </h1>
+      <div className="shop-container">
+        <div>
+          <SimpleImageSlider
+            width={1519}
+            height={390}
+            images={images}
+            showBullets={true}
+            showNavs={true}
+            autoPlay={true}
+          />
+        </div>
 
-        <Box sx={{
-          alignContent: "center",
-          width: 1480,
-          marginTop: 5,
-          boxShadow: 8,
-          marginLeft: 'auto',
-          marginBottom: 3,
-          marginRight: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+        <Box className="card-container" sx={{ width: 1480, marginTop: 5, boxShadow: 8, marginLeft: 'auto', marginBottom: 3, marginRight: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <h2>Shop By Category</h2>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 2, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to='/products'>
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={women}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Shop for Women
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+          <div className="card-container">
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 2, marginBottom: 3, boxShadow: 5 }}>
+                <CardActionArea component={Link} to='/products'>
+                  <CardMedia
+                    component="img"
+                    height="180"
+                    image={women}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Shop for Women
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
 
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={men}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Shop for Men
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+              <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
+                <CardActionArea component={Link} to="/products">
+                  <CardMedia
+                    component="img"
+                    height="180"
+                    image={men}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Shop for Men
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
 
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={kids}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Shop for Kids
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+              <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
+                <CardActionArea component={Link} to="/products">
+                  <CardMedia
+                    component="img"
+                    height="180"
+                    image={kids}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Shop for Kids
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
 
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={footwear}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Shop for Footwear
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+              <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
+                <CardActionArea component={Link} to="/products">
+                  <CardMedia
+                    component="img"
+                    height="180"
+                    image={footwear}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Shop for Footwear
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
 
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginRight: 2, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={accessories}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Shop for Accessories
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+              <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginRight: 2, marginBottom: 3, boxShadow: 5 }}>
+                <CardActionArea component={Link} to="/products">
+                  <CardMedia
+                    component="img"
+                    height="180"
+                    image={accessories}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Shop for Accessories
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </div>
           </div>
         </Box >
 
-        <Box sx={{
-          alignContent: "center",
-          width: 1480,
-          marginTop: 5,
-          boxShadow: 8,
-          marginLeft: 'auto',
-          marginBottom: 3,
-          marginRight: 'auto',
-          display: 'flex',
-          overflowX: 'hidden',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+        <Box className="trending-slider-container" sx={{ width: 1480, marginTop: 5, boxShadow: 8, marginLeft: 'auto', marginBottom: 3, marginRight: 'auto', display: 'flex', overflowX: 'hidden', flexDirection: 'column', alignItems: 'center' }}>
           <h2>Shop By Trending</h2>
-          <IconButton sx={{
-            backgroundColor: 'black',
-            color: 'white',
-            position:'absolute',
-            top:'1040px',
-            zIndex:1,
-            left:'30px',
-            '&:hover': {
-              backgroundColor: 'darkgrey'
-            }
-          }}
-            onClick={handlePrevSlide}>
+          <IconButton className={'trending-slider-btn trending-slider-btn-left'} sx={{ backgroundColor: 'black', color: 'white', left: '-700px', top: '200px' }} onClick={handlePrevSlide}>
             <KeyboardArrowLeftIcon />
           </IconButton>
 
-          <div style={{ display: 'flex', flexDirection: 'row', marginRight:'23px' }}>
+          <div className="trending-slider-container">
             {trendImages.slice(currentSlide, currentSlide + 5).map((trend, index) => (
               <Card
                 key={index}
@@ -222,117 +196,95 @@ function Shop() {
             ))}
           </div>
 
-
-          <IconButton sx={{
-            backgroundColor: 'black',
-            color: 'white',
-            position:'absolute',
-            top:'1040px',
-            right:'30px',
-            zIndex:1,
-            '&:hover': {
-              backgroundColor: 'darkgrey'
-            }
-          }}
-            onClick={handleNextSlide} disabled={marginLeft >= trendImages.length - 5}>
+          <IconButton className={'trending-slider-btn trending-slider-btn-right'} sx={{ backgroundColor: 'black', color: 'white', right: '-710px', top: '-150px' }} onClick={handleNextSlide} disabled={marginLeft >= trendImages.length - 5}>
             <KeyboardArrowRightIcon />
           </IconButton>
         </Box>
 
-        <Box sx={{
-          alignContent: "center",
-          width: 1480,
-          marginTop: 5,
-          boxShadow: 8,
-          marginLeft: 'auto',
-          marginBottom: 3,
-          marginRight: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+        <Box className="discount-container" sx={{ width: 1480, marginTop: 5, boxShadow: 8, marginLeft: 'auto', marginBottom: 3, marginRight: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <h2>Products On Discount</h2>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={dis1}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Men's Cotton Shirts
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+          <div className="card-container">
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
+                <CardActionArea component={Link} to="/products">
+                  <CardMedia
+                    component="img"
+                    height="180"
+                    image={dis1}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Men's Cotton Shirts
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
 
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={dis2}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Women's Tops
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+              <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
+                <CardActionArea component={Link} to="/products">
+                  <CardMedia
+                    component="img"
+                    height="180"
+                    image={dis2}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Women's Tops
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
 
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={dis3}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Bagacks
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+              <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
+                <CardActionArea component={Link} to="/products">
+                  <CardMedia
+                    component="img"
+                    height="180"
+                    image={dis3}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Bagacks
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
 
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={dis4}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Jeans
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+              <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
+                <CardActionArea component={Link} to="/products">
+                  <CardMedia
+                    component="img"
+                    height="180"
+                    image={dis4}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Jeans
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
 
-            <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginRight: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/products">
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={dis5}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Sneakers
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+              <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginRight: 3, marginBottom: 3, boxShadow: 5 }}>
+                <CardActionArea component={Link} to="/products">
+                  <CardMedia
+                    component="img"
+                    height="180"
+                    image={dis5}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Sneakers
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </div>
           </div>
         </Box >
       </div >

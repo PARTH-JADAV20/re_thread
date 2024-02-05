@@ -103,6 +103,9 @@ const ModifyProductDetails = () => {
                       backgroundColor: '#f0f0f0',
                     }}
                   />
+                  <IconButton onClick={() => handleDelete(product.id)} color="error">
+                    <DeleteIcon />
+                  </IconButton>
                   <TextField
                     label="Title"
                     value={product.title}
@@ -175,9 +178,6 @@ const ModifyProductDetails = () => {
                     variant="outlined"
                     style={{ marginBottom: '10px' }}
                   />
-                  <IconButton onClick={() => handleDelete(product.id)} color="error">
-                    <DeleteIcon />
-                  </IconButton>
                 </Box>
               </Grid>
             ))}

@@ -103,6 +103,9 @@ const ModifyUserDetails = () => {
                 >
                   {!user.profilePic && 'U'}
                 </Avatar>
+                <IconButton onClick={() => handleDelete(user.id)} color="error">
+                  <DeleteIcon />
+                </IconButton>
                 <TextField
                   label="Name"
                   value={user.name}
@@ -145,9 +148,7 @@ const ModifyUserDetails = () => {
                   variant="outlined"
                   style={{ marginBottom: '10px' }}
                 />
-                <IconButton onClick={() => handleDelete(user.id)} color="error">
-                  <DeleteIcon />
-                </IconButton>
+
               </Box>
             </Grid>
           ))}
