@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useState } from 'react'; // Import useState hook
+import { useState , useContext} from 'react'; // Import useState hook
+import { AppContext } from './Context';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,6 +15,9 @@ import { NavLink } from 'react-router-dom';
 import './Navbar.css'
 
 export default function Navbar() {
+  const  quantity  = useContext(AppContext);
+  {console.log("object", quantity)}
+
   const cartItemCount = 0;
   const [currentButton, setCurrentButton] = useState(''); // State to keep track of the current button
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -51,12 +55,6 @@ export default function Navbar() {
             </Button>
           </NavLink>
 
-          <NavLink to="/contact" style={{ textDecoration: 'none', color: 'black' }}>
-            <Button className={currentButton === 'contact' ? 'current' : ''} color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }} onClick={() => handleButtonClick('contact')}>
-              Contact
-            </Button>
-          </NavLink>
-
           <NavLink to="/shop" style={{ textDecoration: 'none', color: 'black' }}>
             <Button className={currentButton === 'shop' ? 'current' : ''} color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }} onClick={() => handleButtonClick('shop')}>
               Shop
@@ -66,6 +64,12 @@ export default function Navbar() {
           <NavLink to="/sell" style={{ textDecoration: 'none', color: 'black' }}>
             <Button className={currentButton === 'sell' ? 'current' : ''} color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }} onClick={() => handleButtonClick('sell')}>
               Sell
+            </Button>
+          </NavLink>
+
+          <NavLink to="/contact" style={{ textDecoration: 'none', color: 'black' }}>
+            <Button className={currentButton === 'contact' ? 'current' : ''} color="inherit" sx={{ color: 'black', fontWeight: 'bold', mx: 2 }} onClick={() => handleButtonClick('contact')}>
+              Contact
             </Button>
           </NavLink>
 
@@ -83,7 +87,7 @@ export default function Navbar() {
 
 
           <IconButton className={currentButton === 'cart' ? 'current' : ''} color="inherit" component={Link} to='/cart' onClick={() => handleButtonClick('cart')}>
-            <Badge badgeContent={cartItemCount} color="error">
+            <Badge badgeContent={quantity} color="error">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>

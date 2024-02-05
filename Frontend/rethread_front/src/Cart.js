@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import trend4 from './trend4.webp';
 import trend5 from './trend5.webp';
 import trend6 from './trend6.webp';
@@ -9,8 +9,12 @@ import gliterback from "./gliterback.jpg"
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import { Link } from "react-router-dom"
+import { AppContext } from './Context';
 
 function Cart() {
+
+
+
   const [cartItems, setCartItems] = useState([
     { title: 'Couple Rings', image: trend4, price: 100, size: 'FreeSize' },
     { title: 'Premium Wallet', image: trend5, price: 150, size: 'Medium' },
