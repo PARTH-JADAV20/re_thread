@@ -15,10 +15,7 @@ import { NavLink } from 'react-router-dom';
 import './Navbar.css'
 
 export default function Navbar() {
-  const  quantity  = useContext(AppContext);
-  {console.log("object", quantity)}
-
-  const cartItemCount = 0;
+  const  {totalQuantity}  = useContext(AppContext);
   const [currentButton, setCurrentButton] = useState(''); // State to keep track of the current button
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -87,7 +84,7 @@ export default function Navbar() {
 
 
           <IconButton className={currentButton === 'cart' ? 'current' : ''} color="inherit" component={Link} to='/cart' onClick={() => handleButtonClick('cart')}>
-            <Badge badgeContent={quantity} color="error">
+            <Badge badgeContent={totalQuantity} color="error">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
