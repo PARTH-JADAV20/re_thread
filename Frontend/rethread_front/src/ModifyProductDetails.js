@@ -1,35 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Typography, IconButton, Grid, Box, Avatar } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { InputAdornment } from '@mui/material';
 import Container from '@mui/material/Container';
 import Footer from './Footer';
-
-const sampleProductData = [
-  {
-    id: 1,
-    image: 'https://example.com/product-image.jpg',
-    category: 'Electronics',
-    subcategory: 'Mobiles',
-    title: 'Smartphone X',
-    description: 'A feature-rich smartphone',
-    brand: 'BrandX',
-    size: '6 inches',
-    color: 'Black',
-    material: 'Metal and Glass',
-    mrp: '$699',
-    price: '$599',
-  },
-  // Add more sample product data as needed
-];
+import axios, { isCancel, AxiosError } from 'axios';
+import SaveIcon from '@mui/icons-material/Save';
 
 const ModifyProductDetails = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredProducts, setFilteredProducts] = useState(sampleProductData);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [products, setProducts] = useState([])
+
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/all-products")
+      .then((response) => {
+        setProducts(response.data);
+        setFilteredProducts(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [products]);
+
 
   const handleSearch = () => {
-    const results = sampleProductData.filter((product) =>
+    const results = products.filter((product) =>
       product.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredProducts(results);
@@ -42,10 +40,25 @@ const ModifyProductDetails = () => {
     setFilteredProducts(updatedProducts);
   };
 
+  
+  const handleSave = (productId) => {
+    const userToUpdate = products.find(product => product.id === productId);
+    axios.put(`http://localhost:8000/update-user/${productId}`, userToUpdate)
+      .then((response) => {
+        // Handle successful update
+        console.log("User updated successfully");
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error updating user:", error);
+      });
+  };
+
   const handleDelete = (productId) => {
     const updatedProducts = filteredProducts.filter((product) => product.id !== productId);
     setFilteredProducts(updatedProducts);
   };
+
 
   return (
     <>
@@ -103,87 +116,92 @@ const ModifyProductDetails = () => {
                       backgroundColor: '#f0f0f0',
                     }}
                   />
+                  <div>
                   <IconButton onClick={() => handleDelete(product.id)} color="error">
                     <DeleteIcon />
                   </IconButton>
-                  <TextField
-                    label="Title"
-                    value={product.title}
-                    onChange={(e) => handleEdit('title', product.id, e.target.value)}
-                    variant="outlined"
-                    style={{ marginBottom: '10px' }}
-                  />
-                  <TextField
-                    label="Description"
-                    value={product.description}
-                    onChange={(e) => handleEdit('description', product.id, e.target.value)}
-                    variant="outlined"
-                    multiline
-                    rows={3}
-                    style={{ marginBottom: '10px' }}
-                  />
-                  <TextField
-                    label="Category"
-                    value={product.category}
-                    onChange={(e) => handleEdit('category', product.id, e.target.value)}
-                    variant="outlined"
-                    style={{ marginBottom: '10px' }}
-                  />
-                  <TextField
-                    label="Subcategory"
-                    value={product.subcategory}
-                    onChange={(e) => handleEdit('subcategory', product.id, e.target.value)}
-                    variant="outlined"
-                    style={{ marginBottom: '10px' }}
-                  />
-                  <TextField
-                    label="Brand"
-                    value={product.brand}
-                    onChange={(e) => handleEdit('brand', product.id, e.target.value)}
-                    variant="outlined"
-                    style={{ marginBottom: '10px' }}
-                  />
-                  <TextField
-                    label="Size"
-                    value={product.size}
-                    onChange={(e) => handleEdit('size', product.id, e.target.value)}
-                    variant="outlined"
-                    style={{ marginBottom: '10px' }}
-                  />
-                  <TextField
-                    label="Color"
-                    value={product.color}
-                    onChange={(e) => handleEdit('color', product.id, e.target.value)}
-                    variant="outlined"
-                    style={{ marginBottom: '10px' }}
-                  />
-                  <TextField
-                    label="Material"
-                    value={product.material}
-                    onChange={(e) => handleEdit('material', product.id, e.target.value)}
-                    variant="outlined"
-                    style={{ marginBottom: '10px' }}
-                  />
-                  <TextField
-                    label="MRP"
-                    value={product.mrp}
-                    onChange={(e) => handleEdit('mrp', product.id, e.target.value)}
-                    variant="outlined"
-                    style={{ marginBottom: '10px' }}
-                  />
-                  <TextField
-                    label="Price"
-                    value={product.price}
-                    onChange={(e) => handleEdit('price', product.id, e.target.value)}
-                    variant="outlined"
-                    style={{ marginBottom: '10px' }}
-                  />
-                </Box>
+                  <IconButton color="success" onClick={() => handleSave(product.id)}>
+                    <SaveIcon />
+                  </IconButton>
+                </div>
+                <TextField
+                  label="Title"
+                  value={product.product_name}
+                  onChange={(e) => handleEdit('title', product.id, e.target.value)}
+                  variant="outlined"
+                  style={{ marginBottom: '10px' }}
+                />
+                <TextField
+                  label="Description"
+                  value={product.description}
+                  onChange={(e) => handleEdit('description', product.id, e.target.value)}
+                  variant="outlined"
+                  multiline
+                  rows={3}
+                  style={{ marginBottom: '10px' }}
+                />
+                <TextField
+                  label="Category"
+                  value={product.category}
+                  onChange={(e) => handleEdit('category', product.id, e.target.value)}
+                  variant="outlined"
+                  style={{ marginBottom: '10px' }}
+                />
+                <TextField
+                  label="Subcategory"
+                  value={product.sub_cat}
+                  onChange={(e) => handleEdit('subcategory', product.id, e.target.value)}
+                  variant="outlined"
+                  style={{ marginBottom: '10px' }}
+                />
+                <TextField
+                  label="Brand"
+                  value={product.brand}
+                  onChange={(e) => handleEdit('brand', product.id, e.target.value)}
+                  variant="outlined"
+                  style={{ marginBottom: '10px' }}
+                />
+                <TextField
+                  label="Size"
+                  value={product.size}
+                  onChange={(e) => handleEdit('size', product.id, e.target.value)}
+                  variant="outlined"
+                  style={{ marginBottom: '10px' }}
+                />
+                <TextField
+                  label="Color"
+                  value={product.color}
+                  onChange={(e) => handleEdit('color', product.id, e.target.value)}
+                  variant="outlined"
+                  style={{ marginBottom: '10px' }}
+                />
+                <TextField
+                  label="Material"
+                  value={product.material}
+                  onChange={(e) => handleEdit('material', product.id, e.target.value)}
+                  variant="outlined"
+                  style={{ marginBottom: '10px' }}
+                />
+                <TextField
+                  label="MRP"
+                  value={product.mrp}
+                  onChange={(e) => handleEdit('mrp', product.id, e.target.value)}
+                  variant="outlined"
+                  style={{ marginBottom: '10px' }}
+                />
+                <TextField
+                  label="Price"
+                  value={product.price}
+                  onChange={(e) => handleEdit('price', product.id, e.target.value)}
+                  variant="outlined"
+                  style={{ marginBottom: '10px' }}
+                />
+              </Box>
               </Grid>
-            ))}
-          </Grid>
+        ))}
+      </Grid>
         )}
-      </Container>
+    </Container >
       <Footer />
     </>
   );

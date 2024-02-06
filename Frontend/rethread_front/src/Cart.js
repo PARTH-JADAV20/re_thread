@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import trend4 from './trend4.webp';
 import trend5 from './trend5.webp';
 import trend6 from './trend6.webp';
@@ -12,18 +12,20 @@ import { Link } from "react-router-dom"
 import { AppContext } from './Context';
 
 function Cart() {
-
-
-
+  const { totalQuantity, setTotalQuantity } = useContext(AppContext);
   const [cartItems, setCartItems] = useState([
     { title: 'Couple Rings', image: trend4, price: 100, size: 'FreeSize' },
     { title: 'Premium Wallet', image: trend5, price: 150, size: 'Medium' },
     { title: 'Combat Boots', image: trend6, price: 300, size: '9' },
-    // Add more items to the cart array as needed
   ]);
 
   const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
-  const totalQuantity = cartItems.length;
+  
+  useEffect(() => {
+    const newTotalQuantity = cartItems.length;
+    setTotalQuantity(newTotalQuantity); // Update totalQuantity when cart items change
+  }, [cartItems]);
+
 
   const handleCheckout = () => {
     // Add logic for checkout
@@ -64,11 +66,11 @@ function Cart() {
               <Card key={index} style={{ marginTop: '30px', paddingTop: '10px', borderRadius: '10px', paddingBottom: '10px', marginBottom: '20px', marginLeft: '250px', boxShadow: '5px', display: 'flex', width: '65%' }}>
                 <img src={item.image} alt={item.title} style={{ height: '200px', width: '200px', marginLeft: '40px' }} />
                 <CardContent style={{ marginLeft: '20px' }}>
-                  <Typography variant="h5" sx={{marginTop:'10px'}}>{item.title}</Typography>
+                  <Typography variant="h5" sx={{ marginTop: '10px' }}>{item.title}</Typography>
                   <Typography variant="body2">Size: {item.size}</Typography>
                   <Typography variant="body2">Price: Rs {item.price}</Typography>
                 </CardContent>
-                <IconButton style={{marginLeft: 'auto', marginRight:'30px'}} onClick={() => handleDeleteItem(index)} color="error">
+                <IconButton style={{ marginLeft: 'auto', marginRight: '30px' }} onClick={() => handleDeleteItem(index)} color="error">
                   <DeleteIcon />
                 </IconButton>
               </Card>
@@ -76,14 +78,14 @@ function Cart() {
           )}
         </div>
 
-        {/* Sidebar */}
+        {/* Bottombar */}
         <div style={{ flex: 0.4, padding: '20px 20px 20px 50px', height: '100vh', backgroundColor: 'white', boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)' }}>
-          <Typography variant="h4" style={{ marginBottom: '20px', marginTop: '10px', textAlign:'center' }}>Order Summary</Typography>
-          <Typography variant="body1" style={{textAlign:'center' }}>Total Price: Rs {totalPrice}</Typography>
-          <Typography variant="body1" style={{textAlign:'center' }}>Quantity: {totalQuantity}</Typography>
+          <Typography variant="h4" style={{ marginBottom: '20px', marginTop: '10px', textAlign: 'center' }}>Order Summary</Typography>
+          <Typography variant="body1" style={{ textAlign: 'center' }}>Total Price: Rs {totalPrice}</Typography>
+          <Typography variant="body1" style={{ textAlign: 'center' }}>Quantity: {totalQuantity}</Typography>
           {/* Ordered List of Product Titles */}
-          <Typography variant="h5" style={{ marginTop: '20px', marginBottom: '10px', marginLeft:'25px' }}>Products in Cart:</Typography>
-          <ol style={{ fontSize: '15px'}}>
+          <Typography variant="h5" style={{ marginTop: '20px', marginBottom: '10px', marginLeft: '25px' }}>Products in Cart:</Typography>
+          <ol style={{ fontSize: '15px' }}>
             {cartItems.map((item, index) => (
               <li key={index}>{item.title}</li>
             ))}

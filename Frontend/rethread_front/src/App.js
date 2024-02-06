@@ -16,6 +16,7 @@ import Profile from './Profile';
 import Orders from './Orders';
 import ModifyUserDetails from './ModifyUserDetails';
 import ModifyProductDetails from './ModifyProductDetails';
+import Subcat from './Subcat';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/sell" element={<Sell />} />
           <Route path="/selling-form" element={<SellingForm />} />
+          <Route path="./subcat" element={<Subcat/>} />
           <Route path="/item" element={<Item />} />
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/signup" element={<Signup />} />
