@@ -1,8 +1,10 @@
 //********************************* Connection Requirements (Postman and MongoDb) ************************************* */
 const express = require("express");
+const cors = require('cors');
 const app = express();
 const port = 8000;
 app.use(express.json());
+app.use(cors());
 app.listen(port,()=>{
   console.log(`Server listening at http://localhost:${port}`);
 })
@@ -14,7 +16,7 @@ mongoose
   .then(() => console.log("MongoDB connected…"))
   .catch((err) => console.log(err));
 
-//************************************ Defining Schema *********************************** */
+//************************************ Defining Schema ************************************/
 
 //********************* Product Schema *****************/
 const Schema1 = mongoose.Schema;
@@ -521,13 +523,12 @@ app.post("/:category/:subcat/add-product", async (req, res) => {
   }
 });
 
-// Send Selling Form
-app.post("/user-selling-form/:id", async (req, res) => {
-  const id = req.params.id;
-  const newForm = new Resell({ ...req.body, _id: id });
+// Add selling from
+app.post("/user-selling-form", async (req, res) => {
+  const newForm = new Resell(req.body);
   try {
     await newForm.save();
-    res.send(`Form submitted for ${id}`);
+    res.send('Form submitted successfully');
   } catch (error) {
     res.status(500).send(error);
   }
