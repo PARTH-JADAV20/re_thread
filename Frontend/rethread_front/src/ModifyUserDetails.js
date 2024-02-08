@@ -8,25 +8,30 @@ import useravatar from './useravatar.png';
 import SaveIcon from '@mui/icons-material/Save';
 import { Box } from '@mui/material';
 import Footer from './Footer';
-import axios, { isCancel, AxiosError } from 'axios';
+import axios from 'axios'; // Import axios
+import ReactPaginate from 'react-paginate';
+import './Paginate.css'
 
 const ModifyUserDetails = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const itemsPerPage = 2;
+
 
   useEffect(() => {
     axios.get("http://localhost:8000/all-users")
       .then((response) => {
         setUsers(response.data);
         setFilteredUsers(response.data); // Initialize filteredUsers with all users
+
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-
-
+  }, [users]);
 
   const handleSearch = () => {
     const results = users.filter((user) =>
@@ -35,35 +40,54 @@ const ModifyUserDetails = () => {
     setFilteredUsers(results);
   };
 
-  const handleEdit = (field, userId, value) => {
-    const updatedUsers = filteredUsers.map((user) =>
-      user.id === userId ? { ...user, [field]: value } : user
-    );
-    setFilteredUsers(updatedUsers);
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
   };
 
   const handleDelete = (userId) => {
-    const updatedUsers = filteredUsers.filter((user) => user.id !== userId);
-    setFilteredUsers(updatedUsers);
+    // Send DELETE request to delete the user
+    axios.delete(`http://localhost:8000/delete-user/${userId}`)
+      .then((response) => {
+        // Filter out the deleted user from the state
+        const updatedUsers = filteredUsers.filter((user) => user.id !== userId);
+        setFilteredUsers(updatedUsers);
+        console.log("User deleted successfully");
+      })
+      .catch((error) => {
+        console.error("Error deleting user:", error);
+      });
+    window.alert("User deleted successfully"); // Display alert
   };
 
   const handleSave = (userId) => {
-    const userToUpdate = users.find(user => user.id === userId);
-    axios.put(`http://localhost:8000/update-user/${userId}`, userToUpdate)
-      .then((response) => {
-        // Handle successful update
-        console.log("User updated successfully");
-      })
-      .catch((error) => {
-        // Handle error
-        console.error("Error updating user:", error);
-      });
+    if (editingUser && editingUser._id === userId) {
+      axios.patch(`http://localhost:8000/user-details-update/${userId}`, editingUser)
+        .then(() => {
+          setUsers(users.map(user => user._id === userId ? editingUser : user));
+          setEditingUser(null);
+          console.log("User updated successfully");
+        })
+        .catch((error) => {
+          console.error("Error updating user:", error);
+        });
+    }
   };
+
+
+  const [editingUser, setEditingUser] = useState(null);
+
+ // Update handleInputChange to modify editingUser instead of users
+  const handleInputChange = (e, userId) => {
+    if (editingUser._id === userId) {
+      const { name, value } = e.target;
+      setEditingUser({ ...editingUser, [name]: value });
+    }
+  };
+
 
   const renderArrayItems = (array) => {
     return array.join('\n');
   };
-
 
   return (
     <>
@@ -97,8 +121,8 @@ const ModifyUserDetails = () => {
           </Typography>
         ) : (
           <Grid container spacing={2}>
-            {filteredUsers.map((user) => (
-              <Grid item xs={12} key={user.id}>
+            {filteredUsers.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((user) => (
+              <Grid item xs={12} key={user._id}>
                 <Box
                   style={{
                     border: '1px solid #ddd',
@@ -124,50 +148,61 @@ const ModifyUserDetails = () => {
                     {!user.profilePic && 'U'}
                   </Avatar>
                   <div style={{ display: 'flex', gap: '10px' }}> {/* Style for the icons container */}
-                    <IconButton onClick={() => handleDelete(user.id)} color="error">
+                    <IconButton onClick={() => handleDelete(user._id)} color="error">
                       <DeleteIcon />
                     </IconButton>
-                    <IconButton color="success" onClick={() => handleSave(user.id)}>
+                    <IconButton color="success" onClick={() => handleSave(user._id)}>
                       <SaveIcon />
                     </IconButton>
                   </div>
                   <TextField
+                    name="user_name"
                     label="Name"
-                    value={user.user_name}
-                    onChange={(e) => handleEdit('name', user.id, e.target.value)}
+                    onClick={() => setEditingUser(user)}
+                    value={editingUser && editingUser._id === user._id ? editingUser.user_name : user.user_name}
+                    onChange={(e) => handleInputChange(e, user._id)}
                     variant="outlined"
                     style={{ marginBottom: '10px' }}
                   />
                   <TextField
+                    name="email"
                     label="Email"
-                    value={user.email}
-                    onChange={(e) => handleEdit('email', user.id, e.target.value)}
+                    onClick={() => setEditingUser(user)}
+                    value={editingUser && editingUser._id === user._id ? editingUser.email : user.email}
+                    onChange={(e) => handleInputChange(e, user._id)}
                     variant="outlined"
                     style={{ marginBottom: '10px' }}
                   />
                   <TextField
+                    name="contact"
                     label="Contact"
-                    value={user.contact}
-                    onChange={(e) => handleEdit('contact', user.id, e.target.value)}
+                    onClick={() => setEditingUser(user)}
+                    value={editingUser && editingUser._id === user._id ? editingUser.contact : user.contact}
+                    onChange={(e) => handleInputChange(e, user._id)}
                     variant="outlined"
                     style={{ marginBottom: '10px' }}
                   />
                   <TextField
+                    name="address"
                     label="Address"
-                    value={user.address}
-                    onChange={(e) => handleEdit('address', user.id, e.target.value)}
+                    onClick={() => setEditingUser(user)}
+                    value={editingUser && editingUser._id === user._id ? editingUser.address : user.address}
+                    onChange={(e) => handleInputChange(e, user._id)}
                     variant="outlined"
                     style={{ marginBottom: '10px' }}
                   />
                   <TextField
+                    name="earning"
                     label="Earning"
-                    value={user.earning}
-                    onChange={(e) => handleEdit('earning', user.id, e.target.value)}
+                    onClick={() => setEditingUser(user)}
+                    value={editingUser && editingUser._id === user._id ? editingUser.earning : user.earning}
+                    onChange={(e) => handleInputChange(e, user._id)}
                     variant="outlined"
                     style={{ marginBottom: '10px' }}
                   />
                   <TextField
                     label="Cart"
+                    onClick={() => setEditingUser(user)}
                     value={renderArrayItems(user.cart)}
                     variant="outlined"
                     multiline
@@ -175,24 +210,34 @@ const ModifyUserDetails = () => {
                   />
                   <TextField
                     label="Orders"
+                    onClick={() => setEditingUser(user)}
                     value={renderArrayItems(user.orders)}
                     variant="outlined"
                     multiline
                     style={{ marginBottom: '10px' }}
                   />
-
-
                 </Box>
               </Grid>
             ))}
           </Grid>
-        )
-        }
-      </Container >
+        )}
+      </Container>
+      <ReactPaginate
+          previousLabel={"previous"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={Math.ceil(filteredUsers.length / itemsPerPage)}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+        />
       <Footer />
     </>
   );
-
 };
 
 export default ModifyUserDetails;

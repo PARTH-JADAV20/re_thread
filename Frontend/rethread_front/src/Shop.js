@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Footer from './Footer'
 import shoptop from './shoptop.jpg'
+import shoptop2 from './shoptop2.jpg'
+import shoptop3 from './shoptop3.jpg'
+import shoptop5 from './shoptop5.webp'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -40,10 +43,9 @@ function Shop() {
 
   const images = [
     { url: shoptop },
-    { url: "./trend1.jpg"},
-    { url: "./trend1.jpg"},
-    { url: "./trend1.jpg" },
-    { url: "./trend1.jpg" },
+    { url: shoptop2},
+    { url: shoptop3},
+    { url: shoptop5},
   ];
 
 
@@ -73,6 +75,7 @@ function Shop() {
   return (
     <>
       <div className="shop-container">
+        <h1 style={{position:'absolute', background:'rgba(0,0,0,0.1)',color:'white',fontSize:'3rem', zIndex:5,top:200,left:410, textAlign:'center'}}>20% OFF ON LATEST ARRIVALS !!</h1>
         <div>
           <SimpleImageSlider
             width={1519}
@@ -89,7 +92,7 @@ function Shop() {
           <div className="card-container">
             <div style={{ display: "flex", flexDirection: "row" }}>
               <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 2, marginBottom: 3, boxShadow: 5 }}>
-                <CardActionArea component={Link} to='/products'>
+                <CardActionArea component={Link} to='/subcategory'>
                   <CardMedia
                     component="img"
                     height="180"
@@ -105,7 +108,7 @@ function Shop() {
               </Card>
 
               <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-                <CardActionArea component={Link} to="/products">
+                <CardActionArea component={Link} to="/subcategory">
                   <CardMedia
                     component="img"
                     height="180"
@@ -121,7 +124,7 @@ function Shop() {
               </Card>
 
               <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-                <CardActionArea component={Link} to="/products">
+                <CardActionArea component={Link} to="/subcategory">
                   <CardMedia
                     component="img"
                     height="180"
@@ -137,7 +140,7 @@ function Shop() {
               </Card>
 
               <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-                <CardActionArea component={Link} to="/products">
+                <CardActionArea component={Link} to="/subcategory">
                   <CardMedia
                     component="img"
                     height="180"
@@ -153,7 +156,7 @@ function Shop() {
               </Card>
 
               <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginRight: 2, marginBottom: 3, boxShadow: 5 }}>
-                <CardActionArea component={Link} to="/products">
+                <CardActionArea component={Link} to="/subcategory">
                   <CardMedia
                     component="img"
                     height="180"
@@ -184,7 +187,7 @@ function Shop() {
                 className='animate_from_bottom'
                 sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}
               >
-                <CardActionArea component={Link} to="/products">
+                <CardActionArea component={Link} to="/subcategory">
                   <CardMedia component="img" height="180" image={trend.image} />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
@@ -206,7 +209,7 @@ function Shop() {
           <div className="card-container">
             <div style={{ display: "flex", flexDirection: "row" }}>
               <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-                <CardActionArea component={Link} to="/products">
+                <CardActionArea component={Link} to="/subcategory">
                   <CardMedia
                     component="img"
                     height="180"
@@ -222,7 +225,7 @@ function Shop() {
               </Card>
 
               <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-                <CardActionArea component={Link} to="/products">
+                <CardActionArea component={Link} to="/subcategory">
                   <CardMedia
                     component="img"
                     height="180"
@@ -238,7 +241,7 @@ function Shop() {
               </Card>
 
               <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-                <CardActionArea component={Link} to="/products">
+                <CardActionArea component={Link} to="/subcategory">
                   <CardMedia
                     component="img"
                     height="180"
@@ -254,7 +257,7 @@ function Shop() {
               </Card>
 
               <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-                <CardActionArea component={Link} to="/products">
+                <CardActionArea component={Link} to="/subcategory">
                   <CardMedia
                     component="img"
                     height="180"
@@ -270,7 +273,7 @@ function Shop() {
               </Card>
 
               <Card className='animate_from_bottom' sx={{ width: 270, marginTop: 3, marginLeft: 3, marginRight: 3, marginBottom: 3, boxShadow: 5 }}>
-                <CardActionArea component={Link} to="/products">
+                <CardActionArea component={Link} to="/subcategory">
                   <CardMedia
                     component="img"
                     height="180"
