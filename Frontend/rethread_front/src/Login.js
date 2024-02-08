@@ -11,12 +11,17 @@ import customerImage from "./customer.png";
 import adminImage from "./admin.png";
 import arrow from './arrow.png'
 import './Login.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Login() {
 
   const [accountType, setAccountType] = useState('');
   const handleAccountTypeClick = (type) => {
     setAccountType(type);
   }
+
+  const notify = () => toast.success("Logged In Successfully!");
 
   return (
     <>
@@ -150,9 +155,10 @@ function Login() {
                 marginTop: 3,
                 fontSize: '16px',
                 fontWeight: 'bold',
-              }}>
+              }} onClick={notify}>
                 Login
               </Button>
+              <ToastContainer/>
             </CardContent>
           </Card>
         </Box>

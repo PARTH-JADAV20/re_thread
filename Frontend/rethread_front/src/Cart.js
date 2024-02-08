@@ -9,23 +9,28 @@ import gliterback from "./gliterback.jpg"
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import { Link } from "react-router-dom"
-import { AppContext } from './Context';
+import { AppContext } from './App';
 
 function Cart() {
   const { totalQuantity, setTotalQuantity } = useContext(AppContext);
+
   const [cartItems, setCartItems] = useState([
     { title: 'Couple Rings', image: trend4, price: 100, size: 'FreeSize' },
     { title: 'Premium Wallet', image: trend5, price: 150, size: 'Medium' },
     { title: 'Combat Boots', image: trend6, price: 300, size: '9' },
   ]);
 
-  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
-  
   useEffect(() => {
     const newTotalQuantity = cartItems.length;
     setTotalQuantity(newTotalQuantity); // Update totalQuantity when cart items change
+    {console.log("Inst", totalQuantity)}
   }, [cartItems]);
 
+  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+  
+
+
+  {console.log("1st", totalQuantity)}
 
   const handleCheckout = () => {
     // Add logic for checkout
@@ -83,6 +88,7 @@ function Cart() {
           <Typography variant="h4" style={{ marginBottom: '20px', marginTop: '10px', textAlign: 'center' }}>Order Summary</Typography>
           <Typography variant="body1" style={{ textAlign: 'center' }}>Total Price: Rs {totalPrice}</Typography>
           <Typography variant="body1" style={{ textAlign: 'center' }}>Quantity: {totalQuantity}</Typography>
+          {console.log(totalQuantity)}
           {/* Ordered List of Product Titles */}
           <Typography variant="h5" style={{ marginTop: '20px', marginBottom: '10px', marginLeft: '25px' }}>Products in Cart:</Typography>
           <ol style={{ fontSize: '15px' }}>

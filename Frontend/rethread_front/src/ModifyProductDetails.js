@@ -5,13 +5,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { InputAdornment } from '@mui/material';
 import Container from '@mui/material/Container';
 import Footer from './Footer';
+import productavatar from './useravatar.png';
 import axios, { isCancel, AxiosError } from 'axios';
 import SaveIcon from '@mui/icons-material/Save';
+import ReactPaginate from 'react-paginate';
+import './Paginate.css'
 
 const ModifyProductDetails = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [products, setProducts] = useState([])
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const itemsPerPage = 2;
 
 
   useEffect(() => {
@@ -33,31 +39,50 @@ const ModifyProductDetails = () => {
     setFilteredProducts(results);
   };
 
-  const handleEdit = (field, productId, value) => {
-    const updatedProducts = filteredProducts.map((product) =>
-      product.id === productId ? { ...product, [field]: value } : product
-    );
-    setFilteredProducts(updatedProducts);
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
   };
 
-  
-  const handleSave = (productId) => {
-    const userToUpdate = products.find(product => product.id === productId);
-    axios.put(`http://localhost:8000/update-user/${productId}`, userToUpdate)
-      .then((response) => {
-        // Handle successful update
-        console.log("User updated successfully");
-      })
-      .catch((error) => {
-        // Handle error
-        console.error("Error updating user:", error);
-      });
-  };
 
   const handleDelete = (productId) => {
-    const updatedProducts = filteredProducts.filter((product) => product.id !== productId);
-    setFilteredProducts(updatedProducts);
+    // Send DELETE request to delete the user
+    axios.delete(`http://localhost:8000/delete-product/${productId}`)
+      .then((response) => {
+        // Filter out the deleted user from the state
+        const updatedProducts = filteredProducts.filter((product) => product.id !== productId);
+        setFilteredProducts(updatedProducts);
+        console.log("Product deleted successfully");
+      })
+      .catch((error) => {
+        console.error("Error deleting Product:", error);
+      });
+    window.alert("Product deleted successfully"); // Display alert
   };
+
+  const handleSave = (productId) => {
+    if (editingProduct && editingProduct._id === productId) {
+      axios.patch(`http://localhost:8000/product-details-update/${productId}`, editingProduct)
+        .then(() => {
+          setProducts(products.map(product => product._id === productId ? editingProduct : product));
+          setEditingProduct(null);
+          console.log("Product updated successfully");
+        })
+        .catch((error) => {
+          console.error("Error updating product:", error);
+        });
+    }
+  };
+
+  const [editingProduct, setEditingProduct] = useState(null);
+
+  // Update handleInputChange to modify editingProduct instead of products
+  const handleInputChange = (e, productId) => {
+    if (editingProduct._id === productId) {
+      const { name, value } = e.target;
+      setEditingProduct({ ...editingProduct, [name]: value });
+    }
+  };
+
 
 
   return (
@@ -92,7 +117,7 @@ const ModifyProductDetails = () => {
           </Typography>
         ) : (
           <Grid container spacing={2}>
-            {filteredProducts.map((product) => (
+            {filteredProducts.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((product) => (
               <Grid item xs={12} key={product.id}>
                 <Box
                   style={{
@@ -105,8 +130,8 @@ const ModifyProductDetails = () => {
                   }}
                 >
                   <Avatar
-                    src={product.image}
-                    alt={`Image of ${product.title}`}
+                    src={product.img || productavatar}
+                    alt={`Profile of ${product.product_name}`}
                     style={{
                       width: '100px',
                       height: '100px',
@@ -115,93 +140,129 @@ const ModifyProductDetails = () => {
                       border: '2px solid #ccc',
                       backgroundColor: '#f0f0f0',
                     }}
-                  />
+                  >
+                    {!product.img && 'P'}
+                  </Avatar>
                   <div>
-                  <IconButton onClick={() => handleDelete(product.id)} color="error">
-                    <DeleteIcon />
-                  </IconButton>
-                  <IconButton color="success" onClick={() => handleSave(product.id)}>
-                    <SaveIcon />
-                  </IconButton>
-                </div>
-                <TextField
-                  label="Title"
-                  value={product.product_name}
-                  onChange={(e) => handleEdit('title', product.id, e.target.value)}
-                  variant="outlined"
-                  style={{ marginBottom: '10px' }}
-                />
-                <TextField
-                  label="Description"
-                  value={product.description}
-                  onChange={(e) => handleEdit('description', product.id, e.target.value)}
-                  variant="outlined"
-                  multiline
-                  rows={3}
-                  style={{ marginBottom: '10px' }}
-                />
-                <TextField
-                  label="Category"
-                  value={product.category}
-                  onChange={(e) => handleEdit('category', product.id, e.target.value)}
-                  variant="outlined"
-                  style={{ marginBottom: '10px' }}
-                />
-                <TextField
-                  label="Subcategory"
-                  value={product.sub_cat}
-                  onChange={(e) => handleEdit('subcategory', product.id, e.target.value)}
-                  variant="outlined"
-                  style={{ marginBottom: '10px' }}
-                />
-                <TextField
-                  label="Brand"
-                  value={product.brand}
-                  onChange={(e) => handleEdit('brand', product.id, e.target.value)}
-                  variant="outlined"
-                  style={{ marginBottom: '10px' }}
-                />
-                <TextField
-                  label="Size"
-                  value={product.size}
-                  onChange={(e) => handleEdit('size', product.id, e.target.value)}
-                  variant="outlined"
-                  style={{ marginBottom: '10px' }}
-                />
-                <TextField
-                  label="Color"
-                  value={product.color}
-                  onChange={(e) => handleEdit('color', product.id, e.target.value)}
-                  variant="outlined"
-                  style={{ marginBottom: '10px' }}
-                />
-                <TextField
-                  label="Material"
-                  value={product.material}
-                  onChange={(e) => handleEdit('material', product.id, e.target.value)}
-                  variant="outlined"
-                  style={{ marginBottom: '10px' }}
-                />
-                <TextField
-                  label="MRP"
-                  value={product.mrp}
-                  onChange={(e) => handleEdit('mrp', product.id, e.target.value)}
-                  variant="outlined"
-                  style={{ marginBottom: '10px' }}
-                />
-                <TextField
-                  label="Price"
-                  value={product.price}
-                  onChange={(e) => handleEdit('price', product.id, e.target.value)}
-                  variant="outlined"
-                  style={{ marginBottom: '10px' }}
-                />
-              </Box>
+                    <IconButton onClick={() => handleDelete(product.id)} color="error">
+                      <DeleteIcon />
+                    </IconButton>
+                    <IconButton color="success" onClick={() => handleSave(product._id)}>
+                      <SaveIcon />
+                    </IconButton>
+                  </div>
+                  <TextField
+                    name="product_name"
+                    label="Title"
+                    onClick={() => setEditingProduct(product)}
+                    value={editingProduct && editingProduct._id === product._id ? editingProduct.product_name : product.product_name}
+                    onChange={(e) => handleInputChange(e, product._id)}
+                    variant="outlined"
+                    style={{ marginBottom: '10px' }}
+                  />
+                  <TextField
+                    name="description"
+                    label="Description"
+                    onClick={() => setEditingProduct(product)}
+                    value={editingProduct && editingProduct._id === product._id ? editingProduct.description : product.description}
+                    onChange={(e) => handleInputChange(e, product._id)}
+                    variant="outlined"
+                    multiline
+                    rows={3}
+                    style={{ marginBottom: '10px' }}
+                  />
+                  <TextField
+                    name="category"
+                    label="Category"
+                    onClick={() => setEditingProduct(product)}
+                    value={editingProduct && editingProduct._id === product._id ? editingProduct.category : product.category}
+                    onChange={(e) => handleInputChange(e, product._id)}
+                    variant="outlined"
+                    style={{ marginBottom: '10px' }}
+                  />
+                  <TextField
+                    name="sub_cat"
+                    label="Subcategory"
+                    onClick={() => setEditingProduct(product)}
+                    value={editingProduct && editingProduct._id === product._id ? editingProduct.sub_cat : product.sub_cat}
+                    onChange={(e) => handleInputChange(e, product._id)}
+                    variant="outlined"
+                    style={{ marginBottom: '10px' }}
+                  />
+                  <TextField
+                    name="brand"
+                    label="Brand"
+                    onClick={() => setEditingProduct(product)}
+                    value={editingProduct && editingProduct._id === product._id ? editingProduct.brand : product.brand}
+                    onChange={(e) => handleInputChange(e, product._id)}
+                    variant="outlined"
+                    style={{ marginBottom: '10px' }}
+                  />
+                  <TextField
+                    name="size"
+                    label="Size"
+                    onClick={() => setEditingProduct(product)}
+                    value={editingProduct && editingProduct._id === product._id ? editingProduct.size : product.size}
+                    onChange={(e) => handleInputChange(e, product._id)}
+                    variant="outlined"
+                    style={{ marginBottom: '10px' }}
+                  />
+                  <TextField
+                    name="color"
+                    label="Color"
+                    onClick={() => setEditingProduct(product)}
+                    value={editingProduct && editingProduct._id === product._id ? editingProduct.color : product.color}
+                    onChange={(e) => handleInputChange(e, product._id)}
+                    variant="outlined"
+                    style={{ marginBottom: '10px' }}
+                  />
+                  <TextField
+                    name="material"
+                    label="Material"
+                    onClick={() => setEditingProduct(product)}
+                    value={editingProduct && editingProduct._id === product._id ? editingProduct.material : product.material}
+                    onChange={(e) => handleInputChange(e, product._id)}
+                    variant="outlined"
+                    style={{ marginBottom: '10px' }}
+                  />
+                  <TextField
+                    name="mrp"
+                    label="MRP"
+                    onClick={() => setEditingProduct(product)}
+                    value={editingProduct && editingProduct._id === product._id ? editingProduct.mrp : product.mrp}
+                    onChange={(e) => handleInputChange(e, product._id)}
+                    variant="outlined"
+                    style={{ marginBottom: '10px' }}
+                  />
+                  <TextField
+                    name="price"
+                    label="Price"
+                    onClick={() => setEditingProduct(product)}
+                    value={editingProduct && editingProduct._id === product._id ? editingProduct.price : product.price}
+                    onChange={(e) => handleInputChange(e, product._id)}
+                    variant="outlined"
+                    style={{ marginBottom: '10px' }}
+                  />
+
+                </Box>
               </Grid>
-        ))}
-      </Grid>
+            ))}
+          </Grid>
         )}
-    </Container >
+      </Container >
+      <ReactPaginate
+        previousLabel={"previous"}
+        nextLabel={"next"}
+        breakLabel={"..."}
+        breakClassName={"break-me"}
+        pageCount={Math.ceil(filteredProducts.length / itemsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination"}
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"}
+      />
       <Footer />
     </>
   );
