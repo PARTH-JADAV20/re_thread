@@ -1,7 +1,3 @@
-# Name: Deepanshi Dey 
-# Registration Number: 12102975
-<br>
-
 ## Project: ReThread
 ## Website Deployed Link : https://re-thread.netlify.app/
 ## API Documentation : https://documenter.getpostman.com/view/29752971/2s9YsT6UP7
