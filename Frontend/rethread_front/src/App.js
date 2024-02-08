@@ -19,6 +19,9 @@ import ModifyUserDetails from './ModifyUserDetails';
 import ModifyProductDetails from './ModifyProductDetails';
 import Subcategory from './Subcategory';
 
+const domain  = process.env.REACT_APP_DOMAIN
+
+
 // Create AppContext
 export const AppContext = createContext({ totalQuantity: 0, setTotalQuantity: () => {}});
 

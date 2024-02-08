@@ -12,6 +12,9 @@ import Footer from './Footer';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const domain  = process.env.REACT_APP_DOMAIN
+
+
 function SellingForm() {
 
   const [user_name, setName] = useState('');
@@ -74,7 +77,7 @@ function SellingForm() {
     };
     console.log('Form Data:', formData);
 
-    axios.post('http://localhost:8000/user-selling-form', formData)
+    axios.post(`${domain}/user-selling-form`, formData)
     .then(response => {
       console.log('Form submitted successfully:', response.data);
       toast.success("Submitted Successfully!");
