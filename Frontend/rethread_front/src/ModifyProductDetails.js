@@ -31,14 +31,15 @@ const ModifyProductDetails = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [products]);
+  }, []);
 
 
   const handleSearch = () => {
     const results = products.filter((product) =>
-      product.title.toLowerCase().includes(searchQuery.toLowerCase())
+      product.product_name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredProducts(results);
+    console.log(searchQuery)
   };
 
   const handlePageClick = ({ selected }) => {

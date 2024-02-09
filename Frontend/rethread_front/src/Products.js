@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Checkbox, TextField, IconButton, InputAdornment, FormGroup, FormControlLabel } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import Slider from '@mui/material/Slider';
@@ -9,6 +9,10 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Link } from "react-router-dom"
 import Footer from './Footer';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const domain  = process.env.REACT_APP_DOMAIN
 
 const price = [
   {
@@ -46,6 +50,8 @@ function Products() {
 
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
+
+
 
   // Handler function to update selected colors
   const handleColorChange = (color) => {

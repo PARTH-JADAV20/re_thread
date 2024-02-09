@@ -34,11 +34,11 @@ const ModifyUserDetails = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [users]);
+  }, []);
 
   const handleSearch = () => {
     const results = users.filter((user) =>
-      user.name.toLowerCase().includes(searchQuery.toLowerCase())
+      user.user_name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredUsers(results);
   };
