@@ -5,6 +5,7 @@
 ## Figma Design: https://www.figma.com/file/6iVwYsClDcYMjZlqJueAor/Untitled?type=design&node-id=45%3A251&mode=design&t=n25jfAn6XKE7UtzI-1
 <br>
 
+[Watch the video here](https://drive.google.com/file/d/1V1klB2L-EPAkBUzzQSIoZb1ob_wF4yZP/view?usp=sharing)
 <video src="https://drive.google.com/file/d/1V1klB2L-EPAkBUzzQSIoZb1ob_wF4yZP/view?usp=sharing" height:"200px">
 
 ### Target Problem To Be Solved
