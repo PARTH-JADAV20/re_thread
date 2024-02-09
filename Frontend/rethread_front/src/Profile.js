@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Footer from './Footer';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Profile() {
     const [profilePic, setProfilePic] = useState('');
@@ -17,6 +19,8 @@ function Profile() {
     const [userPassword, setUserPassword] = useState('********');
     const [userAddress, setUserAddress] = useState('123 Main St, City');
     const [showPassword, setShowPassword] = useState(false);
+
+    const notify = () => toast.success("Profile Updated Successfully!");
 
     const handleProfilePicChange = (event) => {
         const file = event.target.files[0];
@@ -130,10 +134,14 @@ function Profile() {
                             marginRight: 'auto',
                             display: 'block',
                         }}
-                        onClick={updateUserDetails}
+                        onClick={() => {
+                            updateUserDetails();
+                            notify();
+                        }}
                     >
                         Save Changes
                     </Button>
+                    <ToastContainer/>
                 </Paper>
             </Box>
             <Footer />

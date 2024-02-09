@@ -19,6 +19,9 @@ import ModifyUserDetails from './ModifyUserDetails';
 import ModifyProductDetails from './ModifyProductDetails';
 import Subcategory from './Subcategory';
 
+const domain  = process.env.REACT_APP_DOMAIN
+
+
 // Create AppContext
 export const AppContext = createContext({ totalQuantity: 0, setTotalQuantity: () => {}});
 
@@ -36,10 +39,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id/:subcategory" element={<Products />} />
           <Route path="/sell" element={<Sell />} />
           <Route path="/selling-form" element={<SellingForm />} />
-          <Route path="/subcategory" element={<Subcategory />} />
+          <Route path="/subcategory/:id" element={<Subcategory />} />
           <Route path="/item" element={<Item />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/signup" element={<Signup />} />

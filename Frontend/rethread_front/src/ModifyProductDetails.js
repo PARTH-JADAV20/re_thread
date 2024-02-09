@@ -11,6 +11,8 @@ import SaveIcon from '@mui/icons-material/Save';
 import ReactPaginate from 'react-paginate';
 import './Paginate.css'
 
+const domain  = process.env.REACT_APP_DOMAIN
+
 const ModifyProductDetails = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -21,7 +23,7 @@ const ModifyProductDetails = () => {
 
 
   useEffect(() => {
-    axios.get("http://localhost:8000/all-products")
+    axios.get(`${domain}/all-products`)
       .then((response) => {
         setProducts(response.data);
         setFilteredProducts(response.data);
@@ -29,14 +31,15 @@ const ModifyProductDetails = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [products]);
+  }, []);
 
 
   const handleSearch = () => {
     const results = products.filter((product) =>
-      product.title.toLowerCase().includes(searchQuery.toLowerCase())
+      product.product_name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredProducts(results);
+    console.log(searchQuery)
   };
 
   const handlePageClick = ({ selected }) => {
@@ -46,7 +49,7 @@ const ModifyProductDetails = () => {
 
   const handleDelete = (productId) => {
     // Send DELETE request to delete the user
-    axios.delete(`http://localhost:8000/delete-product/${productId}`)
+    axios.delete(`${domain}/delete-product/${productId}`)
       .then((response) => {
         // Filter out the deleted user from the state
         const updatedProducts = filteredProducts.filter((product) => product.id !== productId);
@@ -61,7 +64,7 @@ const ModifyProductDetails = () => {
 
   const handleSave = (productId) => {
     if (editingProduct && editingProduct._id === productId) {
-      axios.patch(`http://localhost:8000/product-details-update/${productId}`, editingProduct)
+      axios.patch(`${domain}0/product-details-update/${productId}`, editingProduct)
         .then(() => {
           setProducts(products.map(product => product._id === productId ? editingProduct : product));
           setEditingProduct(null);

@@ -12,6 +12,9 @@ import axios from 'axios'; // Import axios
 import ReactPaginate from 'react-paginate';
 import './Paginate.css'
 
+const domain  = process.env.REACT_APP_DOMAIN
+console.log(domain)
+
 const ModifyUserDetails = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,7 +25,7 @@ const ModifyUserDetails = () => {
 
 
   useEffect(() => {
-    axios.get("http://localhost:8000/all-users")
+    axios.get(`${domain}/all-users`)
       .then((response) => {
         setUsers(response.data);
         setFilteredUsers(response.data); // Initialize filteredUsers with all users
@@ -31,11 +34,11 @@ const ModifyUserDetails = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [users]);
+  }, []);
 
   const handleSearch = () => {
     const results = users.filter((user) =>
-      user.name.toLowerCase().includes(searchQuery.toLowerCase())
+      user.user_name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredUsers(results);
   };
@@ -46,7 +49,7 @@ const ModifyUserDetails = () => {
 
   const handleDelete = (userId) => {
     // Send DELETE request to delete the user
-    axios.delete(`http://localhost:8000/delete-user/${userId}`)
+    axios.delete(`${domain}/delete-user/${userId}`)
       .then((response) => {
         // Filter out the deleted user from the state
         const updatedUsers = filteredUsers.filter((user) => user.id !== userId);
@@ -61,7 +64,7 @@ const ModifyUserDetails = () => {
 
   const handleSave = (userId) => {
     if (editingUser && editingUser._id === userId) {
-      axios.patch(`http://localhost:8000/user-details-update/${userId}`, editingUser)
+      axios.patch(`${domain}/user-details-update/${userId}`, editingUser)
         .then(() => {
           setUsers(users.map(user => user._id === userId ? editingUser : user));
           setEditingUser(null);
