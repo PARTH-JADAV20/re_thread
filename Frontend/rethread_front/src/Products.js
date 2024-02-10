@@ -11,10 +11,11 @@ import { Link } from "react-router-dom"
 import Footer from './Footer';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-const domain  = process.env.REACT_APP_DOMAIN
+const domain = process.env.REACT_APP_DOMAIN
 
-const price = [
+const priceMarks = [
   {
     value: 0,
     label: '0'
@@ -48,41 +49,130 @@ function valuetext(label) {
 
 function Products() {
 
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
+  const [priceRange, setPriceRange] = useState([0, 100]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const { category, subcat } = useParams();
+  console.log(category, subcat)
+
+  // Map numeric category values to category names
+  const categoryMap = {
+    '1': 'women',
+    '2': 'men',
+    '3': 'kids',
+    '4': 'footwear',
+    '5': 'accessories',
+  };
+
+  // Remove specific words (women, men, children, all) from the beginning
+  const wordsToRemove = ['women', 'men', 'children', 'all'];
+  const regex = new RegExp(wordsToRemove.join("|"), "gi");
+  const filteredWords = subcat.replace(regex, '');
+
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    axios.get(`${domain}/${categoryMap[category]}/${filteredWords}/products`)
+      .then((response) => {
+        setProducts(response.data);
+        setFilteredProducts(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [category, filteredWords]); // Added dependencies
 
 
 
-  // Handler function to update selected colors
-  const handleColorChange = (color) => {
-    setSelectedColors((prevSelectedColors) => {
+  const handleSearchChange = event => {
+    setSearchQuery(event.target.value);
+  };
+  { console.log(searchQuery) }
+
+
+
+
+  { console.log("This is it", filteredProducts) }
+
+  const handleColorChange = color => {
+    setSelectedColors(prevSelectedColors => {
+      let newSelectedColors;
       if (prevSelectedColors.includes(color)) {
-        // If color is already selected, remove it
-        return prevSelectedColors.filter((selectedColor) => selectedColor !== color);
+        newSelectedColors = prevSelectedColors.filter(selectedColor => selectedColor !== color);
       } else {
-        // If color is not selected, add it
-        return [...prevSelectedColors, color];
+        newSelectedColors = [...prevSelectedColors, color];
       }
+      handleCheckClick(newSelectedColors, selectedSizes);
+      return newSelectedColors;
     });
   };
 
-
-  const handleSizeChange = (size) => {
-    setSelectedSizes((prevSelectedSizes) => {
+  const handleSizeChange = size => {
+    setSelectedSizes(prevSelectedSizes => {
+      let newSelectedSizes;
       if (prevSelectedSizes.includes(size)) {
-        // If size is already selected, remove it
-        return prevSelectedSizes.filter((selectedSize) => selectedSize !== size);
+        newSelectedSizes = prevSelectedSizes.filter(selectedSize => selectedSize !== size);
       } else {
-        // If size is not selected, add it
-        return [...prevSelectedSizes, size];
+        newSelectedSizes = [...prevSelectedSizes, size];
       }
+      handleCheckClick(selectedColors, newSelectedSizes);
+      return newSelectedSizes;
     });
+  };
+
+  const handleCheckClick = (newSelectedColors, newSelectedSizes) => {
+    const newFilteredProducts = products.filter(product =>
+      (newSelectedColors.length === 0 || newSelectedColors.includes(product.color)) &&
+      (newSelectedSizes.length === 0 || newSelectedSizes.includes(product.size))
+    );
+    // Update state with filtered products
+    setFilteredProducts(newFilteredProducts);
   }
 
-  const handleSearchClick = () => {
-    console.log('Search icon clicked');
-    // Handle search logic or any other actions here
+  // const handleColorChange = color => {
+  //   setSelectedColors(prevSelectedColors => {
+  //     let newSelectedColors;
+  //     if (prevSelectedColors.includes(color)) {
+  //       newSelectedColors = prevSelectedColors.filter(selectedColor => selectedColor !== color);
+  //     } else {
+  //       newSelectedColors = [...prevSelectedColors, color];
+  //     }
+  //     handleCheckClick(newSelectedColors, selectedSizes);
+  //     return newSelectedColors;
+  //   });
+  // };
+
+  // const handleSizeChange = size => {
+  //   setSelectedSizes(prevSelectedSizes => {
+  //     let newSelectedSizes;
+  //     if (prevSelectedSizes.includes(size)) {
+  //       newSelectedSizes = prevSelectedSizes.filter(selectedSize => selectedSize !== size);
+  //     } else {
+  //       newSelectedSizes = [...prevSelectedSizes, size];
+  //     }
+  //     handleCheckClick(selectedColors, newSelectedSizes);
+  //     return newSelectedSizes;
+  //   });
+  // };
+
+
+
+  const handlePriceChange = (event, newValue) => {
+    setPriceRange(newValue);
   };
+  { console.log(priceRange) }
+
+
+  const handleSearchClick = () => {
+    console.log("Filter triggered")
+    const filteredProducts = products.filter(product =>
+      product.product_name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    // Update state with filtered products
+    setFilteredProducts(filteredProducts);
+    { console.log(filteredProducts) }
+  }
 
 
   return (
@@ -91,9 +181,11 @@ function Products() {
         <div style={{ width: '18%', backgroundColor: '#f0f0f0', padding: '20px', alignContent: 'center', alignItems: 'center', height: '100%', overflowY: 'auto' }}>
           <h2>Filters</h2>
           <TextField
-            id="filled-basic"
+            id="search"
             label="Search"
             variant="outlined"
+            value={searchQuery}
+            onChange={handleSearchChange}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -107,66 +199,60 @@ function Products() {
 
           <Box className="selectColor" style={{ width: '90%', marginTop: '20px', backgroundColor: 'white', padding: '10px', marginBottom: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <h3>Select Color</h3>
-            <FormGroup
-              column
-              aria-label="color"
-              name="color"
-              value={selectedColors}
-              onChange={handleColorChange}
-            >
+            <FormGroup column aria-label="color" name="color" value={selectedColors} onChange={handleColorChange}>
               <FormControlLabel
-                value="maroon"
-                control={<Checkbox checked={selectedColors.includes('maroon')} onChange={() => handleColorChange('maroon')} style={{ color: 'maroon' }} />}
+                value="Maroon"
+                control={<Checkbox checked={selectedColors.includes('Maroon')} onChange={() => handleColorChange('Maroon')} style={{ color: 'Maroon' }} />}
                 label="Maroon"
               />
               <FormControlLabel
-                value="red"
-                control={<Checkbox checked={selectedColors.includes('red')} onChange={() => handleColorChange('red')} style={{ color: 'red' }} />}
+                value="Red"
+                control={<Checkbox checked={selectedColors.includes('Red')} onChange={() => handleColorChange('Red')} style={{ color: 'Red' }} />}
                 label="Red"
               />
               <FormControlLabel
                 value="Pink"
-                control={<Checkbox checked={selectedColors.includes('pink')} onChange={() => handleColorChange('pink')} style={{ color: 'pink' }} />}
+                control={<Checkbox checked={selectedColors.includes('Pink')} onChange={() => handleColorChange('Pink')} style={{ color: 'Pink' }} />}
                 label="Pink"
               />
               <FormControlLabel
                 value="Orange"
-                control={<Checkbox checked={selectedColors.includes('orange')} onChange={() => handleColorChange('orange')} style={{ color: 'orange' }} />}
+                control={<Checkbox checked={selectedColors.includes('Orange')} onChange={() => handleColorChange('Orange')} style={{ color: 'Orange' }} />}
                 label="Orange"
               />
               <FormControlLabel
                 value="Green"
-                control={<Checkbox checked={selectedColors.includes('green')} onChange={() => handleColorChange('green')} style={{ color: 'green' }} />}
+                control={<Checkbox checked={selectedColors.includes('Green')} onChange={() => handleColorChange('Green')} style={{ color: 'Green' }} />}
                 label="Green"
               />
               <FormControlLabel
                 value="Black"
-                control={<Checkbox checked={selectedColors.includes('black')} onChange={() => handleColorChange('black')} style={{ color: 'black' }} />}
+                control={<Checkbox checked={selectedColors.includes('Black')} onChange={() => handleColorChange('Black')} style={{ color: 'Black' }} />}
                 label="Black"
               />
               <FormControlLabel
                 value="Navy"
-                control={<Checkbox checked={selectedColors.includes('navy')} onChange={() => handleColorChange('navy')} style={{ color: 'navy' }} />}
+                control={<Checkbox checked={selectedColors.includes('Navy')} onChange={() => handleColorChange('Navy')} style={{ color: 'Navy' }} />}
                 label="Navy"
               />
               <FormControlLabel
                 value="Blue"
-                control={<Checkbox checked={selectedColors.includes('blue')} onChange={() => handleColorChange('blue')} style={{ color: 'blue' }} />}
+                control={<Checkbox checked={selectedColors.includes('Blue')} onChange={() => handleColorChange('Blue')} style={{ color: 'Blue' }} />}
                 label="Blue"
               />
               <FormControlLabel
                 value="Yellow"
-                control={<Checkbox checked={selectedColors.includes('yellow')} onChange={() => handleColorChange('yellow')} style={{ color: 'yellow' }} />}
+                control={<Checkbox checked={selectedColors.includes('Yellow')} onChange={() => handleColorChange('Yellow')} style={{ color: 'Yellow' }} />}
                 label="Yellow"
               />
               <FormControlLabel
-                value="Cream"
-                control={<Checkbox checked={selectedColors.includes('beige')} onChange={() => handleColorChange('beige')} style={{ color: 'beige' }} />}
-                label="Cream"
+                value="White"
+                control={<Checkbox checked={selectedColors.includes('White')} onChange={() => handleColorChange('White')} style={{ color: 'White' }} />}
+                label="White"
               />
               <FormControlLabel
                 value="Grey"
-                control={<Checkbox checked={selectedColors.includes('grey')} onChange={() => handleColorChange('grey')} style={{ color: 'grey' }} />}
+                control={<Checkbox checked={selectedColors.includes('Grey')} onChange={() => handleColorChange('Grey')} style={{ color: 'Grey' }} />}
                 label="Grey"
               />
               {/* Add other color options as needed */}
@@ -175,13 +261,7 @@ function Products() {
 
           <Box className="selectSize" style={{ width: '90%', marginTop: '20px', backgroundColor: 'white', padding: '10px', marginBottom: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <h3>Select Size</h3>
-            <FormGroup
-              column
-              aria-label="color"
-              name="color"
-              value={selectedColors}
-              onChange={handleColorChange}
-            >
+            <FormGroup column aria-label="size" name="size" value={selectedSizes} onChange={handleSizeChange}>
               <FormControlLabel
                 value="XS"
                 control={<Checkbox checked={selectedSizes.includes('XS')} onChange={() => handleSizeChange('XS')} />}
@@ -219,13 +299,13 @@ function Products() {
             <h3>Set Price Range</h3>
             <Slider
               sx={{ width: '90%' }}
-              aria-label="Always visible"
-              defaultValue={80}
+              value={priceRange}
+              onChange={handlePriceChange}
+              valueLabelDisplay="auto"
               getAriaValueText={valuetext}
-              step={10}
-              marks={price}
+              aria-labelledby="range-slider"
+              marks={priceMarks}
             />
-
           </Box>
         </div>
 
@@ -244,190 +324,30 @@ function Products() {
               flexWrap: 'wrap',
             }}
           >
-            <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item">
-                <CardMedia
-                  component="img"
-                  height="190"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    product_name
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    size
-                  </Typography>
-                  <Typography variant="h5" color='black'>
-                    price
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                    MRP
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item">
-                <CardMedia
-                  component="img"
-                  height="190"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    product_name
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    size
-                  </Typography>
-                  <Typography variant="h5" color='black'>
-                    price
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                    MRP
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item">
-                <CardMedia
-                  component="img"
-                  height="190"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    product_name
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    size
-                  </Typography>
-                  <Typography variant="h5" color='black'>
-                    price
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                    MRP
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item">
-                <CardMedia
-                  component="img"
-                  height="190"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    product_name
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    size
-                  </Typography>
-                  <Typography variant="h5" color='black'>
-                    price
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                    MRP
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item">
-                <CardMedia
-                  component="img"
-                  height="190"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    product_name
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    size
-                  </Typography>
-                  <Typography variant="h5" color='black'>
-                    price
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                    MRP
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item">
-                <CardMedia
-                  component="img"
-                  height="190"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    product_name
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    size
-                  </Typography>
-                  <Typography variant="h5" color='black'>
-                    price
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                    MRP
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item">
-                <CardMedia
-                  component="img"
-                  height="190"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    product_name
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    size
-                  </Typography>
-                  <Typography variant="h5" color='black'>
-                    price
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                    MRP
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-
-            
-            <Card className='animate_from_bottom' sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}>
-              <CardActionArea component={Link} to="/item">
-                <CardMedia
-                  component="img"
-                  height="190"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    product_name
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    size
-                  </Typography>
-                  <Typography variant="h5" color='black'>
-                    price
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                    MRP
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+            {Array.isArray(filteredProducts) && filteredProducts.map((product) => (
+              <Card
+                key={product.id} // Use a unique identifier for the key
+                className='animate_from_bottom'
+                sx={{ width: 250, height: 350, marginTop: 3, marginLeft: 3, marginBottom: 3, boxShadow: 5 }}
+              >
+                <Link to={`/item/${product._id}`} style={{textDecoration:'none'}}> {/* Wrap CardActionArea with Link */}
+                  <CardActionArea>
+                    <CardMedia component="img" height="190" src={product.front_img} alt={product.name} />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div" style={{color:'black'}}>
+                        {product.product_name}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        Size: {product.size}
+                      </Typography>
+                      <Typography variant="h6" color='black'>
+                        Price: Rs {product.price}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Link>
+              </Card>
+            ))}
           </Box>
         </div>
       </div>

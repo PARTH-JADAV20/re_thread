@@ -39,11 +39,11 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/products/:id/:subcategory" element={<Products />} />
+          <Route path="/products/:category/:subcat" element={<Products />} />
           <Route path="/sell" element={<Sell />} />
           <Route path="/selling-form" element={<SellingForm />} />
           <Route path="/subcategory/:id" element={<Subcategory />} />
-          <Route path="/item" element={<Item />} />
+          <Route path="/item/:id" element={<Item/>} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
