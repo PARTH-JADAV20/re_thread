@@ -75,7 +75,7 @@ function Cart() {
                   <Typography variant="body2">Size: {item.size}</Typography>
                   <Typography variant="body2">Price: Rs {item.price}</Typography>
                 </CardContent>
-                <IconButton style={{ marginLeft: 'auto', marginRight: '30px' }} onClick={() => handleDeleteItem(index)} color="error">
+                <IconButton style={{ marginLeft: 'auto', marginRight: '30px', height:'40px', marginTop:'8%' }} onClick={() => handleDeleteItem(index)} color="error">
                   <DeleteIcon />
                 </IconButton>
               </Card>

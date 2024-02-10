@@ -4,69 +4,83 @@ import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from '@
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
 
-import WomenTops from './Tops.jpg';
-import CTops from './CTops.webp';
-import WomenBottomWears from './WBottomWears.avif';
-import MBottomWears from './MBottomWears.webp';
-import CBottomWears from './CBottomWears.jpg';
-import WomenCoats from './WCoats.jpg';
-import MCoats from './MCoats.png';
-import CCoats from './CCoats.webp';
-import WomenDresses from './Dresses.jpeg';
-import CDresses from './CDresses.webp';
-import WomenTraditionals from './WTraditionals.jpg';
-import MTraditionals from './MTraditionals.jpg';
-import CTraditionals from './CTraditionals.webp';
-import Tshirts from './Tshirts.jpg';
-import Shirts from './Shirts.avif';
-import Heels from './Heels.webp';
-import Crocs from './Crocs.jpg';
-import Slippers from './Slippers.jpg';
-import Shoes from './Shoes.avif';
-import Boots from './Boots.jpg';
-import Rings from './Rings.jpg';
-import Bracelets from './Bracelets.webp';
-import Bags from './Bags.webp';
-import Necklaces from './Necklaces.avif';
-import Earings from './Earings.jpg';
+import womentops from './Tops.jpg';
+import childrentops from './CTops.webp';
+import womenbottomwear from './WBottomWears.avif';
+import menbottomwear from './MBottomWears.webp';
+import childrenbottomwear from './CBottomWears.jpg';
+import womencoats from './WCoats.jpg';
+import mencoats from './MCoats.png';
+import childrencoats from './CCoats.webp';
+import womendresses from './Dresses.jpeg';
+import childrendresses from './CDresses.webp';
+import womentraditionals from './WTraditionals.jpg';
+import mentraditionals from './MTraditionals.jpg';
+import childrentraditionals from './CTraditionals.webp';
+import mentshirts from './Tshirts.jpg';
+import menshirts from './Shirts.avif';
+import allheels from './Heels.webp';
+import allcrocs from './Crocs.jpg';
+import allslippers from './Slippers.jpg';
+import allshoes from './Shoes.avif';
+import allboots from './Boots.jpg';
+import allrings from './Rings.jpg';
+import allbracelets from './Bracelets.webp';
+import allbags from './Bags.webp';
+import allnecklaces from './Necklaces.avif';
+import allearings from './Earings.jpg';
+
 
 // Sample data for subcategories (replace with your actual data)
 const subcategories = {
-  1: ['WomenTops', 'WomenBottomWears', 'WomenCoats', 'WomenDresses', 'WomenTraditionals'],
-  2: ['Tshirts', 'MBottomWears', 'MCoats', 'Shirts', 'MTraditionals'],
-  3: ['CTops', 'CBottomWears', 'CCoats', 'CTraditionals', 'CDresses'],
-  4: ['Heels', 'Crocs', 'Slippers', 'Shoes', 'Boots'],
-  5: ['Rings', 'Bracelets', 'Bags', 'Necklaces', 'Earings'],
+  1: ['womentops', 'womenbottomwear', 'womencoats', 'womendresses', 'womentraditionals'],
+  2: ['mentshirts', 'menbottomwear', 'mencoats', 'menshirts', 'mentraditionals'],
+  3: ['childrentops', 'childrenbottomwear', 'childrencoats', 'childrentraditionals', 'childrendresses'],
+  4: ['allheels', 'allcrocs', 'allslippers', 'allshoes', 'allboots'],
+  5: ['allrings', 'allbracelets', 'allbags', 'allnecklaces', 'allearings'],
 };
 
-// Sample images for subcategories
+
 const subcategoryImages = {
-  WomenTops: WomenTops,
-  CTops: CTops,
-  WomenBottomWears: WomenBottomWears,
-  MBottomWears: MBottomWears,
-  CBottomWears: CBottomWears,
-  WomenCoats: WomenCoats,
-  MCoats: MCoats,
-  CCoats: CCoats,
-  WomenDresses: WomenDresses,
-  CDresses: CDresses,
-  WomenTraditionals: WomenTraditionals,
-  MTraditionals: MTraditionals,
-  CTraditionals: CTraditionals,
-  Tshirts: Tshirts,
-  Shirts: Shirts,
-  Heels: Heels,
-  Crocs: Crocs,
-  Slippers: Slippers,
-  Shoes: Shoes,
-  Boots: Boots,
-  Rings: Rings,
-  Bracelets: Bracelets,
-  Bags: Bags,
-  Necklaces: Necklaces,
-  Earings: Earings,
+  womentops: womentops,
+  childrentops: childrentops,
+  womenbottomwear: womenbottomwear,
+  menbottomwear: menbottomwear,
+  childrenbottomwear: childrenbottomwear,
+  womencoats: womencoats,
+  mencoats: mencoats,
+  childrencoats: childrencoats,
+  womendresses: womendresses,
+  childrendresses: childrendresses,
+  womentraditionals: womentraditionals,
+  mentraditionals: mentraditionals,
+  childrentraditionals: childrentraditionals,
+  mentshirts: mentshirts,
+  menshirts: menshirts,
+  allheels: allheels,
+  allcrocs: allcrocs,
+  allslippers: allslippers,
+  allshoes: allshoes,
+  allboots: allboots,
+  allrings: allrings,
+  allbracelets: allbracelets,
+  allbags: allbags,
+  allnecklaces: allnecklaces,
+  allearings: allearings,
 };
+
+function capitalizeEachWord(str) {
+  const wordsToRemove = ['women', 'men', 'children', 'all'];
+
+  const regex = new RegExp(wordsToRemove.join("|"), "gi");
+  let separatedWords = str.replace(regex, (matchedWord) => matchedWord + ' ');
+  separatedWords = separatedWords.replace(/\b\w/g, (char) => char.toUpperCase());
+  console.log(separatedWords);
+  return separatedWords;
+}
+
+
+
 function Subcategory() {
 
   const { id } = useParams();
@@ -106,7 +120,7 @@ function Subcategory() {
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
-                        {subcategory}
+                        {capitalizeEachWord(subcategory)}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
