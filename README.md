@@ -6,7 +6,7 @@
 <br>
 
 ## Video Link
-[![Screenshot](https://github.com/Deepanshi03/re_thread/assets/92084743/71971b68-8195-422f-bbbb-034b85c2eed9)](https://drive.google.com/file/d/1V1klB2L-EPAkBUzzQSIoZb1ob_wF4yZP/view?usp=drive_link)
+[![Screenshot](https://github.com/Deepanshi03/re_thread/assets/92084743/e4666b86-a823-4e57-9671-b78d11badf51)](https://youtu.be/tV-O_enx7Ck?si=Wk4z2skI-UTOAkL5)
 
 
 ### Target Problem To Be Solved
