@@ -6,7 +6,7 @@
 <br>
 
 ## Video Link
-[![Screenshot](https://github.com/Deepanshi03/re_thread/assets/92084743/71971b68-8195-422f-bbbb-034b85c2eed9)](https://drive.google.com/file/d/1V1klB2L-EPAkBUzzQSIoZb1ob_wF4yZP/view?usp=drive_link)
+[![Screenshot](https://github.com/Deepanshi03/re_thread/assets/92084743/e4666b86-a823-4e57-9671-b78d11badf51)](https://youtu.be/tV-O_enx7Ck?si=Wk4z2skI-UTOAkL5)
 
 
 ### Target Problem To Be Solved
@@ -20,20 +20,25 @@ Thus problem to be solved is, the lack of a user-friendly, trustworthy, and effi
 <br>
 
 
-
 ### List Of Features:
 
-- For Buyers
-  1. SignUp and Login
-  2. Filter Option
-  3. Search Option
-  4. Product selection and Viewing
-  5. Cart Option
-  6. Payment Gateway
-- For Sellers
-  1. SignUp and Login
-  2. Option for Listing clothes to be sold
-  3. Device Gallery access and Image selection feature
- <br>
+**********************************************************************************************************************************************************
+| Features                                 | Description                                                                                                 |
+|------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| Product Filter Option                    | Allows users to filter products based on Color, Size ad Price Range                                         |
+| Product Search Option                    | Enables users to search for specific products.                                                              |
+| Product Zoom In overlay                  | Provides users with the ability to zoom in on product images for a closer look.                             |
+| Links to Social Media, Mail and Maps     | Allows users to easily contact ReThraed on social media platforms, send via email, and on maps.             |
+| Product selection and Viewing            | Users can select products and view their details, including images and descriptions.                        |
+| Automatic Profit Calculation             | Automatically calculates profits for sellers based on ReSale Price                                          |
+| User Cart                                | Users can add products to a cart for easy checkout.                                                         |
+| Error and Success Toasts using Toastify  | Displays toast messages for errors and successes using the Toastify library for enhanced user feedback.     |
+| Option for Listing clothes to be sold    | Sellers can list clothes they want to sell on the platform.                                                 |
+| Device Gallery access                    | Provides access to the device gallery for selecting images.                                                 |
+| Image selection feature                  | Allows users to select images for their products from various sources.                                      |
+| User Details Updation Feature (Admins)   | Admins can update user details such as name, email, etc.                                                    |
+| Product Details Updation Feature (Admins)| Admins can update product details such as name, description, etc.                                           |
+**********************************************************************************************************************************************************
+
 
 
